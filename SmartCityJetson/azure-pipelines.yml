@@ -1,0 +1,72 @@
+trigger: none
+pr: none
+#  branches:
+#    include:
+#      - main
+
+
+name: $(Build.BuildId)
+
+variables:
+  ACR_NAME: acrsmartcityjetson
+  ACR_LOGIN: acrsmartcityjetson.azurecr.io
+  IMAGE_NAME: smartcity
+  JETSON_DEVICES: "jetson1 jetson2 jetson3 jetson4 jetson5 jetson6 jetson7" #
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+
+- task: AzureCLI@2
+  displayName: Build ARM64 image in ACR
+  inputs:
+    azureSubscription: armConnection
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      TAG="v$(Build.BuildNumber)"
+      echo "Building ${IMAGE_NAME}:${TAG} for linux/arm64 in ACR..."
+      az acr build \
+        --registry $(ACR_NAME) \
+        --image $(ACR_LOGIN)/$(IMAGE_NAME):${TAG} \
+        --platform linux/arm64 \
+        .
+
+- task: AzureCLI@2
+  displayName: Install Azure IoT extension
+  inputs:
+    azureSubscription: armConnection
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az config set extension.use_dynamic_install=yes_without_prompt
+      az extension add --name azure-iot --yes
+
+- script: |
+    TAG="v$(Build.BuildNumber)"
+    NEW_TAG="$(ACR_LOGIN)/$(IMAGE_NAME):${TAG}"
+    echo "Updating deployment.json image=${NEW_TAG}  version=${TAG}"
+    # 1) actualizează imaginea
+    sed -i "/\"smartcity\"/,/}/s|\"image\": *\"[^\"]*\"|\"image\": \"${NEW_TAG}\"|" deployment.json
+    # 2) actualizează acelaşi bloc pentru câmpul version
+    sed -i "/\"smartcity\"/,/}/s|\"version\": *\"[^\"]*\"|\"version\": \"${TAG}\"|" deployment.json
+  displayName: 'Update smartcity image tag & version'
+
+
+- task: AzureCLI@2
+  displayName: Deploy to IoT Edge on all Jetsons
+  continueOnError: true
+  inputs:
+    azureSubscription: armConnection
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      for DEV in $JETSON_DEVICES; do
+        echo "Deploying to ${DEV}"
+        az iot edge set-modules \
+          --hub-name hub-jetson \
+          --device-id "${DEV}" \
+          --content @deployment.json
+      done

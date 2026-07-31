@@ -1,0 +1,146 @@
+﻿@using SmartCity.Web.Models.UserManagement
+@model UserEditModel
+
+
+<input asp-for="Id" />
+
+
+
+<div class="row same-cols-height">
+
+
+    <div class="col-md-3">
+        <dl>
+            <dt>UserName</dt>
+            <dd> <span class="badge badge-success">@Model.UserName</span> </dd>
+            @*            <dt>LockoutEnabled</dt>
+            <dd>@Model.LockoutEnabled</dd>*@
+            <dt>LockoutEnd</dt>
+            <dd>@Model.LockoutEnd</dd>
+            <dt>Account</dt>
+            <dd>@Model.AccountName</dd>
+
+            <dt>Email</dt>
+            <dd>@Model.Email </dd>
+        </dl>
+
+    </div>
+
+    <div class="col-md-3">
+        <dl>
+            <dt>FirstName</dt>
+            <dd>@Model.FirstName </dd>
+            <dt>LastName</dt>
+            <dd>@Model.LastName </dd>
+
+            <dt>CreatedAt</dt>
+            <dd>@Model.CreatedAt </dd>
+            <dt>UpdatedAt</dt>
+            <dd>@Model.UpdatedAt </dd>
+        </dl>
+    </div>
+
+
+
+
+    <div class="col-md-3">
+        <dl>
+        </dl>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-sm-2">
+        <label class="control-label" asp-for="Enabled"></label>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <input asp-for="Enabled" type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" />
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        <div class="col-sm-2">
+            <label class="control-label" asp-for="TwoFactorEnabled"></label>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <input asp-for="TwoFactorEnabled" type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <label class="control-label" asp-for="LockoutEnabled"></label>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <input asp-for="LockoutEnabled" type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <span class="badge badge-warning">Roles:</span>
+        </div>
+        <div class="col-sm-3">
+            <ul>
+                @foreach (var role in Model.Roles)
+                {
+                    <li>@role</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <span class="badge badge-warning">Claims:</span>
+        </div>
+        <div class="col-sm-3">
+            <ul>
+                @foreach (var claim in Model.Claims)
+                {
+                    <li>@claim</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+@*     <div class="row">
+        <div class="col-md-2">
+            <a href="@Url.Action("Edit", "SuperAdmin", new {Id = @Model.AppUserId} )" target="_blank" class="btn btn-primary btn-sm" aria-pressed="true">
+                Edit data
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <a href="@Url.Action("ChangePassword", "SuperAdmin", new {Id = Model.AppUserId} )" target="_blank" class="btn btn-secondary btn-sm" aria-pressed="true">
+            Change password
+        </a>
+    </div> *@
+
+
+
+
+@section Scripts
+{
+
+    <link href="~/lib/bootstrap-toggle/css/bootstrap2-toggle.min.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+    <script src="~/js/usermanagement.js"></script>
+}

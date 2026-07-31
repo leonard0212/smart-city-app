@@ -1,0 +1,46 @@
+﻿<div id="PieChart"></div>
+
+@section scripts {
+    <script src="~/lib/apexcharts/apexcharts.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+           var options = {
+  series: [44, 55, 41, 17, 15],
+  chart: {
+    height: 350,
+    type: 'donut',
+  },
+  labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+  dataLabels: {
+    enabled: true,
+    dropShadow: {
+      enabled: false,
+    },
+  },
+  plotOptions: {
+    pie: {
+      donut: {
+        size: '65%', // Creates the "donut" for space in the middle
+        labels: {
+          show: true,
+          total: {
+            show: true,
+            label: 'Total' // Text inside the middle            
+          },
+        },
+      },
+    },
+  },
+};
+
+            var chart = new ApexCharts(document.querySelector("#PieChart"), options);
+            chart.render();
+        });
+
+
+
+
+
+    </script>
+}

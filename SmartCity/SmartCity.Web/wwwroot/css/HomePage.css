@@ -1,0 +1,348 @@
+﻿.sc-home-page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 4px;
+    border-radius: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.interval-container input {
+    cursor: pointer;
+}
+
+.sc-home-one {
+    display: flex;
+    justify-content: space-between;
+    gap: 22px;
+    min-height: 326px;
+}
+
+.info-interval-box-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    gap: 22px;
+    min-height: 326px;
+}
+
+.info-interval-box, .sum-card, .info-map-container, .info-report-box {
+    background: #eeeef1;
+    border-radius: 12px;
+}
+
+.info-interval-box {
+    min-height: 133px;
+    max-height: 160px;
+    padding: 20px 30px;
+}
+
+.info-body-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+    height: 50%;
+}
+
+.info-body .body-box-one .body-dot, .info-body .body-box-two .body-dot, .info-body .body-box-tree .body-dot, .info-body .body-box-four .body-dot {
+    display: inline-block;
+    height: 37px;
+    width: 37px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    padding: 6px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.info-body .body-box-one .body-dot {
+    background: #000;
+}
+
+.info-body .body-box-two .body-dot {
+    background: #D7D061;
+}
+
+.info-body .body-box-tree .body-dot {
+    background: #EF2323;
+}
+
+.info-body .body-box-four .body-dot {
+    background: #6CD172;
+}
+
+.info-sum-card-container {
+    display: flex;
+    gap: 22px;
+    min-height: 166px;
+    height: 100%;
+    overflow-x: auto;
+}
+
+.sum-card {
+    height: 165px;
+    min-width: 150px;
+    width: 100%;
+}
+
+.sum-card-title {
+    display: flex;
+    align-items: center;
+    height: 38px;
+    width: 100%;
+    background: #93a2bc;
+    border-radius: 12px 12px 0px 0px;
+}
+
+.sum-card-body {
+    height: calc(100% - 41px);
+    gap: 10px;
+    padding-left: 10px;
+}
+
+    .sum-card-body .body-box-one .body-dot, .sum-card-body .body-box-two .body-dot, .sum-card-body .body-box-tree .body-dot {
+        display: inline-block;
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 14px;
+        color: #fff;
+        padding: 3px;
+        font-weight: 500;
+        margin-right: 5px;
+    }
+
+    .sum-card-body .body-box-one .body-dot {
+        background: #EF2323;
+    }
+
+    .sum-card-body .body-box-two .body-dot {
+        background: #D7D061;
+    }
+
+    .sum-card-body .body-box-tree .body-dot {
+        background: #6CD172;
+    }
+
+    .sum-card-body .body-box-one span:nth-child(2), .sum-card-body .body-box-two span:nth-child(2), .sum-card-body .body-box-tree span:nth-child(2) {
+        display: inline-block;
+        width: 130px;
+    }
+
+.sc-home-two {
+    display: flex;
+    gap: 22px;
+    height: 100%;
+}
+
+.sc-home-middle-container {
+    height: calc(100vh - 265px);
+    overflow: hidden;
+}
+
+.info-report-box-container {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.info-map-container {
+    flex: 2;
+    min-height: 45%;
+    height: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    margin: 0px;
+}
+
+.sc-data-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 265px);
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    gap: 10px;
+}
+
+.info-report-box {
+    height: 100%;
+    width: 450px;
+    padding: 20px;
+}
+
+.info-status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 40px;
+    height: 80%;
+}
+
+.info-status-name {
+    display: inline-block;
+    width: 70%;
+}
+
+.info-status-box {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    max-width: 250px;
+    width: 100%;
+    height: 32px;
+    background: #93A3BC 0% 0% no-repeat padding-box;
+    border-radius: 21px;
+    padding: 0px 2px 0px 15px;
+}
+
+    .info-status-box i {
+        width: 25px;
+    }
+
+.info-status-name {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.info-status-dot {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0px 8px;
+}
+
+.sc-map-container, .sc-data-insert-container {
+    height: 50%;
+    padding: 6px 10px 10px 0px;
+    margin: 0px;
+    border: 1px solid #D5D3D3;
+    border-radius: 12px;
+}
+
+#show-big-preview {
+    height: 100%;
+    width: 100%;
+    background: aqua;
+    position: absolute;
+    top: 0px;
+    z-index: 100000;
+    left: 0;
+}
+
+#detectionPreview.img-preview {
+    position: relative;
+    transform: scale(1);
+    min-height:150px;
+}
+
+
+#detectionPreview {
+    transition: transform 0.2s ease-in-out;
+    cursor: zoom-in;
+    overflow: hidden;
+}
+
+    #detectionPreview img {
+        max-width: -webkit-fill-available;
+        max-height: 150px;
+    }
+
+
+#tab2-picture.images-container {
+    transform: scale(1);
+    position: absolute;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: grab;
+    width: 100%;
+    display: none;
+}
+
+    #tab2-picture.images-container.lg-view {
+        display: flex;
+    }
+
+        #tab2-picture.images-container.lg-view img {
+            cursor: grab;
+            max-height: 90vh;
+        }
+
+#tab2-picture {
+    transition: transform 0.2s ease-in-out;
+    cursor: zoom-in;
+    user-select: none;
+    overflow: hidden;
+}
+
+    #tab2-picture img {
+        pointer-events: none;
+        user-select: none;
+    }
+
+
+/*#region MediaQueris*/
+
+
+@media (max-height: 930px) {
+    .sc-home-page-container {
+        padding: 10px 20px 10px 10px;
+        gap: 10px;
+    }
+
+    .sc-data-container {
+        height: calc(100vh - 243px);
+    }
+
+    .sc-map-container {
+        padding: 5px 10px 40px 0px
+    }
+
+    .sc-home-one {
+        gap: 10px;
+    }
+
+    .sc-home-two {
+        max-height: 450px;
+    }
+
+
+
+    .info-report-box p {
+        margin-bottom: 5px !important;
+    }
+
+    .info-status-container {
+        gap: 10px;
+        padding: 10px 30px;
+    }
+
+    .info-report-box-container {
+        gap: 10px;
+    }
+
+    .info-report-box {
+        padding: 15px;
+    }
+
+    .sc-home-middle-container {
+        height: calc(100vh - 243px);
+        overflow: hidden;
+    }
+}
+
+/*#endregion MediaQueris*/

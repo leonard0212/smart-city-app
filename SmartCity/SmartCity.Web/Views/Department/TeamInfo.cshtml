@@ -1,0 +1,99 @@
+﻿@using SmartCity.Web.Models.Departament
+@model TeamInfoViewModel
+
+<link rel="stylesheet" href="~/css/DepartmentPage.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+
+
+<input asp-for="Id" type="hidden" />
+<div class="sc-dep-container">
+
+    <div class="px-4">
+        <div class="title-large">@Model.Name</div>
+        <div class="text-xsmall"><span class="wheight600">Id: </span><span>@Model.Id</span></div>
+        <div class="text-xsmall"><span class="wheight600">Data si ora: </span><span>@Model.CreatedAt</span></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="px-5 mt-5">Members</h2>
+
+            <div class="table-wrapper">
+                <table class="table table-hover table-responsive table-sm sc-table">
+                    <thead>
+                        <tr class="text-xsmall wheight600">
+                            <th scope="col">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.UserMembership)
+                        {
+
+                            <tr class="text-xxsmall wheight400 detection-table-row">
+                                <th scope="row"></th>
+                                <td>@item.Value</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm btn-removeUserFromTeam" data-id="@item.Key">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-md-6">
+            <h2 class="px-5 mt-5">Add Members to group</h2>
+
+            <div class="table-wrapper">
+                <table class="table table-hover table-responsive table-sm sc-table">
+                    <thead>
+                        <tr class="text-xsmall wheight600">
+                            <th scope="col" style="max-width:30px">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Add</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.NotUserMembership)
+                        {
+
+                            <tr class="text-xxsmall wheight400 detection-table-row">
+                                <th scope="row" style="max-width:30px"></th>
+                                <td>@item.Value</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm btn-addUserToTeam" data-id="@item.Key">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/departement.js"></script>
+}

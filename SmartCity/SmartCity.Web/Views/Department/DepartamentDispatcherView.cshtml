@@ -1,0 +1,93 @@
+﻿@using SmartCity.Web.Models.Departament
+@model GanttViewModel
+
+<link rel="stylesheet" href="~/css/DepartmentPage.css" asp-append-version="true" />
+
+
+<div class="sc-dep-grantt-page-container">
+    <div class="mb-3">
+        <button class="sc-general-btn home-tab-btn text-small" id="showTrashDepartmentGrantt">Salubritate</button>
+        <button class="sc-general-btn home-tab-btn ms-4 text-small" id="showRoadInfrastructureGrantt" style="width: 210px">Infrastructura rutiera</button>
+        <button class="sc-general-btn home-tab-btn ms-4 text-small" id="showPublicDomainGrantt">Spatii verzi</button>
+
+        <form asp-controller="Department" asp-action="Gantt" method="post" autocomplete="off" id="form-create-guarantees-offer" class="department-form d-flex-ic center-flex-align">
+            <div class="text-large wheight600">Timeline</div>
+            <div class="">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="BeginDate" hidden>De la</label>
+                <input asp-for="BeginDate" type="date" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height" style="height:30px; max-height:30px">
+            </div>
+            <div class="">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="EndDate" hidden>De la</label>
+                <input asp-for="EndDate" type="date" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height" style="height:30px; max-height:30px">
+            </div>
+
+            <button type="submit" class="sc-general-btn ic-active text-small sc-sm-width" style="height:30px">Caută</button>
+        </form>
+    </div>
+    <div class="mb-3">
+        <div id="taskInfoContainer"></div>
+    </div>
+    <partial name="_DepartamentGranttViewPartial" model="Model" />
+
+    @*    <div class="info-message sc-dep d-flex-ic gap20 mb-4">
+        <div class="sc-dep-one w-100-ic">
+            <p class="title-regular wheight700 p-3 mb-3">Echipe disponibile: <span>@DateTime.Now.ToString("dd.MM.yyyy")</span></p>
+            <ul class="text-regular p-3 li-remove-dot">
+                <li>Team1</li>
+                <li>Team2</li>
+                <li>Team3</li>
+            </ul>
+        </div>
+        <div class="sc-dep-two w-100-ic">
+            <p class="title-regular wheight700 p-3 mb-3">Probleme in curs de rezolvare: <span>@DateTime.Now.ToString("dd.MM.yyyy")</span></p>
+            <div class="text-xsmall p-3">
+                <div class="d-flex-ic center-flex-justify-between"><span>Asfaltare groapa Bd. Unirii 30</span><span>Team1</span></div>
+                <div class="d-flex-ic center-flex-justify-between"><span>Asfaltare groapa Str. Prevederii</span><span>Team2</span></div>
+                <div class="d-flex-ic center-flex-justify-between"><span>Groapa Str. Ozana</span><span>Team3</span></div>
+            </div>
+            <div class="text-xsmall p-3">
+                <div class="d-flex-ic center-flex-justify-between"><span>Asfaltare groapa Bd. Unirii 30</span><span>Team1</span></div>
+                <div class="d-flex-ic center-flex-justify-between"><span>Asfaltare groapa Str. Prevederii</span><span>Team2</span></div>
+                <div class="d-flex-ic center-flex-justify-between"><span>Groapa Str. Ozana</span><span>Team3</span></div>
+            </div>
+        </div>
+        <div class="sc-dep-three w-100-ic">
+            <p class="title-regular wheight700 p-3 mb-3">Contact echipa</p>
+            <div class="bottom-flex gap20 w-100-ic px-4">
+                <textarea id="teamContact" rows="4" class="form-control input-sm" style="width:70%"> </textarea>
+                <button type="button" class="sc-general-btn ic-active text-xsmall me-2" data-bs-toggle="modal" style="width:115px;height:28px">
+                    <span>Trimite mesaj</span>
+                </button>
+            </div>
+            
+        </div>
+    </div> *@
+
+</div>
+
+
+@* <button onclick="loadGantt()">Load Gantt</button>
+    <div id="ganttContainer">
+    </div> *@
+
+@* <script>
+    function loadGantt() {
+        console.log("click")
+        const id = '1';
+        fetch('/Department/Gantt?departamentId=' + id)
+            .then(res => res.text())
+            .then(html => {
+                const container = document.getElementById('ganttContainer');
+                container.innerHTML = html;
+
+                const scripts = container.querySelectorAll("script");
+                scripts.forEach(script => {
+                    const s = document.createElement("script");
+                    s.text = script.textContent;
+                    document.body.appendChild(s);
+                });
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadGantt);
+</script> *@

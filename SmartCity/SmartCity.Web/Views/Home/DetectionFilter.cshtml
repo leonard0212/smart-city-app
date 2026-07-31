@@ -1,0 +1,44 @@
+﻿@using SmartCity.Web.Models.Home
+@model DetectionFilterModel
+
+<div class="sc-home-two">
+    <div class=" w-100-ic mt-2" data-controller="home" data-action="filterDetections" id="docs-filter">
+        <div class="row" style="margin-left:18px;">
+            <div class="form-group col sc-sm-width me-4" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="ReportingDateStart">Data începerii</label>
+                <input asp-for="ReportingDateStart" type="date" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height">
+            </div>
+            <div class="form-group col sc-sm-width me-4" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="ReportingDateEnd">Data încheierii</label>
+                <input asp-for="ReportingDateEnd" type="date" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height">
+            </div>
+ 
+            <div class="form-group col sc-sm-width me-4" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="Category">Categoria</label>
+                <select asp-for-enum="Category" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            </div>
+            <div class="form-group col sc-sm-width me-4" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="Severity">Severitate</label>
+                <select asp-for-enum="Severity" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            </div>
+
+            <div class="form-group col sc-sm-width me-4" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="NeedIntervention">Necesită intervenție</label>
+                <select asp-for-enum="NeedIntervention" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            </div>
+
+            <div class="form-group col sc-sm-width me-4" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="ResolutionStatus">Starea </label>
+                <select asp-for-enum="ResolutionStatus" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            </div>
+            <div class="form-group col sc-sm-width" style="padding:0px">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="DepartamentId">Departamentul</label>
+                <select asp-for="DepartamentId" asp-items="@Model.Departaments" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            </div>
+
+        </div>
+        <div class="mt-4" style="margin-left:18px;">
+            <button type="button" id="btnFilter" class="sc-general-btn ic-active text-small sc-sm-width" style="height:35px;">Caută</button>
+        </div>
+    </div>
+</div>

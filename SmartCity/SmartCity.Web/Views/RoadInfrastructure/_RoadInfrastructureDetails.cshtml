@@ -1,0 +1,36 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Web.Models.RoadInfrastructure
+@model RoadInfrastructureInfoModel
+
+
+@{
+    string dimensionClass = Model.Dimension.Description() switch
+    {
+        "Medium" => "severity-class medium-severity",
+        "Remediata" => "severity-class repaired-severity",
+        "Low" => "severity-class small-severity",
+        "Critica" => "severity-class critical-severity",
+        "High" => "severity-class bigger-severity",
+        _ => ""
+    };
+}
+
+<div class="details-container">
+    <div class="details-col-one">
+        <div>
+            <p class="text-regular wheight600 ">Dimensiune</p>
+            <p class="@dimensionClass text-center-ic text-small wheight400" style="margin:0">@Model.Dimension</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Tip intervenție</p>
+            <p class="text-small wheight400">@Model.Type.Description()</p>
+        </div>
+       
+    </div>
+    <div class="details-col-two">
+        <div>
+            <p class="text-regular wheight600">Diametru</p>
+            <p class="text-small wheight400">@Model.Diameter</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@using SmartCity.Web.Models.UserManagement
+@model UserManagementFilterModel
+<link rel="stylesheet" href="~/css/UserPage.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+
+
+<div class="sc-user-container" data-controller="UserManagement" data-action="GetUsers" id="users-filter">
+
+    <div class="d-flex-ic gap20" style="padding: 10px 20px;">
+
+        <div class="form-group col sc-std-width">
+            <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="Username">Nume user</label>
+            <input asp-for="Username" class="form-control sc-custom-inputs form-input sc-std-width mt-2" />
+        </div>
+
+        <div class="bottom-flex">
+            <button type="button" id="btnFilter" class="sc-general-btn ic-active text-small" style="width:200px;height:35px">Caută</button>
+        </div>
+    </div>
+
+    <div class="bottom-flex" style="padding: 10px 20px;">
+        @* <a class="sc-general-btn ic-active text-small center-flex gap10" asp-controller="UserManagement" asp-action="CreateUser" style="width:250px;height:35px"> *@
+        @*     <i class="fa fa-user-plus"></i> *@
+        @*     <span>Crează un nou user</span> *@
+        @* </a> *@
+        <a class="sc-general-btn ic-active text-small center-flex gap10"
+           id="btnCreateUser"
+           style="width:250px;height:35px">
+            <i class="fa fa-user-plus"></i>
+            <span>Crează un nou user</span>
+        </a>
+    </div>
+
+    <div class="pagination-results filter-pagination" data-filter-id="#users-filter" data-filter-on-load="true">
+    </div>
+</div>
+
+<partial name="_CreateUserPartialModal" />
+

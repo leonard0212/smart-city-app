@@ -1,0 +1,86 @@
+﻿@using SmartCity.Domain.Models.Enums
+<link rel="stylesheet" href="~/css/RoadInfrastructure.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+
+<div class="home-page-container">
+    <div class="mt-4">
+
+        <input id="detectionCategory" value="@DetectionCategory.Billboards" type="hidden" />
+
+
+        <div class="mb-3">
+            <button class="sc-general-btn home-tab-btn text-small" id="showHomeTab1Button">Statistici generale</button>
+            <button class="sc-general-btn home-tab-btn ms-4 text-small" id="showHomeTab2Button">Detalii locație</button>
+        </div>
+
+        <div id="tabHomeContent">
+            <div id="homeTab1" class="tab-pane active">
+                <div class="info-box-container">
+                    <div class="home-box-one">
+                        <div class="home-box-one-contain" id="grid-data-content"></div>
+                    </div>
+                    <div class="home-box-two"> <div id="categoryChart"></div></div>
+                    <div class="home-box-tree">
+                        <div id="sizeChart"></div>
+                    </div>
+                </div>
+
+                <div class="info-box-container" style="margin-top:22px">
+                    <div class="home-box-one">
+                        <div id="map" style="height: 100%;"></div>
+                    </div>
+                    <div class="home-box-two"></div>
+                    <div class="home-box-tree">
+                        <div id="severityChart2"></div>
+                    </div>
+                </div>
+                <div class="info-box-container carousel-container" style="margin-top:22px">
+                    <div class="home-box-one carousel-container">
+                        <button class="carousel-btn left"><i class="fa-solid fa-play"></i></button>
+                        <div id="carusel-detections-container">
+                            <partial name="_PreloaderMaxPartial" />
+                        </div>
+                        <button class="carousel-btn right"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div id="homeTab2" class="tab-pane" style="display: none;">
+
+                <div class="info-box-container tab2">
+                    <div class="home-box-one tab2">
+                        <div class="home-box-one-contain">
+                            <div class="images-container center-flex" id="tab2-picture">
+                                <img id="detectionImg" src="">
+                                @* <img src="~/Assets/City/4.jpg" alt="city image" /> *@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home-box-two tab2">
+                        <div class="home-box-two-contain h-100" id="tab2-category"></div>
+                    </div>
+                </div>
+
+                <div class="info-box-container tab2" style="margin-top:22px">
+                    <div class="home-box-one tab2">
+                        <div id="map2" style="height: 100%;"></div>
+                    </div>
+                    <div class="home-box-two tab2">
+                        <div class="home-box-two-contain h-100" id="tab2-detail"></div>
+                    </div>
+                </div>
+                <div class="info-box-container tab2" style="margin-top:22px">
+                    <div class="home-box-one tab2">
+                        <div class="home-box-two-contain h-100" id="tabChat-detail"></div>
+                    </div>
+                    <div class="home-box-two tab2">
+                        <div class="home-box-two-contain h-100" id="tabX-detail"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/lib/apexcharts/apexcharts.min.js"></script>
+    <script src="~/js/billboard.js" asp-append-version="true"></script>
+}

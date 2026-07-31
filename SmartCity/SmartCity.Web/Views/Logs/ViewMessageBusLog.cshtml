@@ -1,0 +1,27 @@
+﻿@using SmartCity.Core.Utils
+@using SmartCity.Domain.Models.Logs
+@model MessageBrokerDataLogs
+
+@{
+
+    var imageUrl = JsonUtils.GetValueByKey(Model?.Body?.ToString(), "ImageUrl");
+    var imagepreview = JsonUtils.GetValueByKey(Model?.Body?.ToString(), "ImageUrlPreview");
+}
+
+
+
+<dl>
+    <dt>QueueName</dt>
+    <dd>@Model.QueueName</dd>
+    <dt>Logged</dt>
+    <dd>@Model.Logged</dd>
+    <dt>EdgeId</dt>
+    <dd>@Model.EdgeId</dd>
+    <dt>Preview</dt>
+    <dd><img src="@imagepreview"></dd>
+    <dt>ImageUrl</dt>
+    <dd><img src="@imageUrl"></dd>
+    <dt>Body</dt>
+    <dd>@Model.Body</dd>
+
+</dl>

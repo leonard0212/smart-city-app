@@ -1,0 +1,46 @@
+﻿@using SmartCity.Web.Models.Detection
+@model DetectionViewModel
+
+<link rel="stylesheet" href="~/css/RoadInfrastructure.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+
+
+<input asp-for="Id" type="hidden" />
+<input id="detectionCategory" value="@Model.Category" type="hidden" />
+<input id="rawDataId" value="@Model.RawDataId" type="hidden" />
+
+<div class="individual-detection-container m-4">
+    <div class="mb-4">
+        @* <button class="sc-general-btn home-tab-btn text-small" id="showTabInfo">Info</button> *@
+        <button class="sc-general-btn home-tab-btn ms-4 text-small" id="showTabFlux">Flux rezolvare</button>
+        @* <button class="sc-general-btn home-tab-btn ms-4 text-small" id="showTabChat">Chat</button> *@
+    </div>
+
+
+    <div class="tab-content mt-3" id="myTabContent">
+        @* <div class="tab-pane" style="display: none;" id="info" role="tabpanel">
+            <partial name="_GeneralInformationPartial" model="@Model" />
+        </div> *@
+
+        <div class="tab-pane active h-100-ic" id="approvalFlow" role="tabpanel">
+
+            <partial name="_GeneralInformationPartial" model="@Model" />
+            @* <div class="flow-container" id="flow-container"></div> *@
+           
+        </div>
+
+        @* <div class="tab-pane" style="display: none;" id="chat" role="tabpanel">
+            <div id="chat-container"></div>
+        </div> *@
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/detection2.js" asp-append-version="true"></script>
+    <script src="~/js/GMaps2.js" asp-append-version="true"></script>
+    <script src="~/js/FrontEnd/Calendar.js" asp-append-version="true"></script>
+}
+
+
+
+

@@ -1,0 +1,54 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Web.Models.Trash
+@model TrashInfoModel
+
+@{
+    string statusClass = Model.AssetStatus.Description() switch
+    {
+        "Normal" => "severity-class medium-severity",
+        "Alertă" => "severity-class critical-severit",
+        _ => ""
+    };
+}
+
+@{
+    string trashVolumClass = Model.TrashVolumType.Description() switch
+    {
+        "Mic" => "severity-class small-severity",
+        "Mediu" => "severity-class medium-severity",
+        "Mare" => "severity-class bigger-severity",
+        _ => ""
+    };
+}
+
+<div class="details-container">
+    <div class="details-col-one">
+        <div>
+            <p class="text-regular wheight600">Status</p>
+            <p class="@statusClass text-small wheight400 text-center-ic" style="margin:0">@Model.AssetStatus.Description()</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Conditie</p>
+            <p class="text-small wheight400">@Model.TrashCondition</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Volum</p>
+            <p class="@trashVolumClass text-small wheight400 text-center-ic" style="margin:0">@Model.TrashVolumType.Description()</p>
+        </div>
+
+    </div>
+    <div class="details-col-two">
+        <div>
+            <p class="text-regular wheight600">Catagorie</p>
+            <p class="text-small wheight400">@Model.TrashAssetCategory.Description()</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Descriere</p>
+            <p class="text-small wheight400">@Model.TrashDescription</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Cantitate</p>
+            <p class="text-small wheight400">@Model.TrashQuantity</p>
+        </div>
+    </div>
+</div>

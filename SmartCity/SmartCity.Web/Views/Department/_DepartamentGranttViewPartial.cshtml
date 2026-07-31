@@ -1,0 +1,54 @@
+﻿@using Newtonsoft.Json
+@using SmartCity.Web.Models.Departament
+@model GanttViewModel
+
+@{
+    var ganttJson = JsonConvert.SerializeObject(Model.GranttData);
+}
+
+
+
+
+<style>
+    #chartWrapper {
+        position: relative;
+    }
+
+    #chartGrantt {
+        position: relative;
+    }
+
+    .gantt-label {
+        position: absolute;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        pointer-events: none;
+        white-space: normal;
+        line-height: 1.2em;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+        overflow: hidden;
+        z-index:2000;
+    }
+</style>
+
+<!-- Google Charts loader -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Gantt data injected from Razor -->
+<script>
+    window.ganttTasks = @Html.Raw(JsonConvert.SerializeObject(Model.GranttData));
+</script>
+
+  
+
+<div id="chartWrapper">
+    <div id="chartGrantt"></div>
+</div>
+
+<!-- External JavaScript -->
+<script type="text/javascript" src="~/js/GranttChart.js" asp-append-version="true"></script>
+
+

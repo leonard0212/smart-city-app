@@ -1,0 +1,40 @@
+﻿@using SmartCity.Domain.ServiceModels.DetectionChat
+@model List<DetectionChatOut>
+
+<input type="hidden" id="chatDetectionId" />
+<div class="text-container sc-chat mb-3">
+    <div class="text-small wheight600 mb-4">Comentariu</div>
+    <textarea id="detection-chat-txt"></textarea>
+    <button class="sc-general-btn info-update-btn text-small sc-chat w-100" id="btn-add-chat-message" type="button">Adauga comentariu</button>
+</div>
+
+
+
+<div class="chat-container sc-chat">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var chat in Model)
+        {
+            <div class="chat-message sc-chat">
+                <div class="chat-avatar sc-chat">
+                    <div class="avatar-circle sc-chat">
+                        @chat.AddedBy?.Substring(0, 1).ToUpper()
+                    </div>
+                </div>
+                <div class="chat-content sc-chat">
+                    <div class="chat-header sc-chat">
+                        <span class="chat-user sc-chat wheight800">@chat.AddedBy</span>
+                        <span class="chat-date sc-chat">@chat.CreatedAt?.ToString("yyyy-MM-dd HH:mm")</span>
+                    </div>
+                    <div class="chat-text sc-chat">@chat.Text</div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="no-chat sc-chat">No messages available.</div>
+    }
+</div>
+
+

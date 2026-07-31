@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SmartCity.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/TextAndColor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ButtonsInputsLabel.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SmartCity.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Components/Modal.css" asp-append-version="true" />
+</head>
+<body>
+    <div id="app-loader-container" class="loading-container">
+        <div class="loader"></div>
+        <div class="loader-text">Proces în curs!</div>
+    </div>
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <header>
+            <partial name="_NavBarPartial" />           
+        </header>
+    }
+
+    <div class="main-container">
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <partial name="_SideBarPartial" />
+            <partial name="_ZoomableImageViewerPartial" />
+        }
+
+        @* <partial name="_UserProfilePartial" /> *@
+        <main role="main" class="main-web">
+            @RenderBody()
+        </main>
+        <input type="hidden" id="appUrl" value="@Url.Content("~")/" />
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/pagination.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Design.js" asp-append-version="true"></script>
+    <script src="~/js/GMaps.js" asp-append-version="true"></script>
+    <script src="~/js/detection.js" asp-append-version="true"></script>
+    <script src="~/js/jsUtils.js" asp-append-version="true"></script> 
+    
+    <script src="~/js/detectionUtils.js" asp-append-version="true"></script>
+    <script src="~/js/RawDetectionsToProcess.js" asp-append-version="true"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARi22RTm_JRKaYqEembOAs4DLKMXo4i2o"></script>
+    <script src="https://unpkg.com/@@googlemaps/markerclustererplus/dist/index.min.js"></script>
+
+    <script type="text/javascript">
+        jsUtils.initAjax();
+    </script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

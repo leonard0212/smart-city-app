@@ -1,0 +1,113 @@
+﻿@using SmartCity.Web.Models.Detection
+@model DetectionFlowViewModel
+
+
+
+
+@{
+    int index = 0;
+}
+
+@foreach (var item in Model.Logs)
+{
+    var extraClass = (index % 2 == 0) ? "box-one" : "box-two";
+
+    <div class="flux-log-single p-2 @extraClass">
+        <div style="padding:0px 15px;border-right:1px solid #eeeef1">
+            <div><span class="text-small wheight500">@item.User</span></div>
+            <div><span class="text-small wheight300">@item.CreatedAt</span></div>
+        </div>
+
+        <div><span class="text-small wheight400 log-text">@Html.Raw(item.LogText.Replace(Environment.NewLine, "<br>"))</span></div>
+    </div>
+
+    index++;
+}
+
+<input asp-for="DetectionId" type="hidden">
+<div class="center-flex-justify-between mt-3">
+    <button type="button" class="sc-general-btn ic-active text-small me-2" data-bs-toggle="modal" data-bs-target="#assignToDepartamentModal" style="width:250px;height:35px">
+        <i class="fa-solid fa-person-walking-arrow-right me-2"></i>
+        <span>Atribuie la departament</span>
+    </button>
+
+    <button type="button" class="sc-general-btn ic-active sc-succes text-small me-2" data-bs-toggle="modal" data-bs-target="#markAsRezolvedModal" style="width:250px;height:35px">
+        <i class="fa-solid fa-check me-2"></i>
+        <span>Marchează că rezolvat</span>
+    </button>
+    <button type="button" class="sc-general-btn ic-active sc-abort text-small" data-bs-toggle="modal" data-bs-target="#rejectModal" style="width:250px;height:35px;">
+        <i class="fa-solid fa-trash me-2"></i>
+        <span>Respinge</span>
+    </button>
+</div>
+
+
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xxlarge28 wheight500 text-no-wrap" id="exampleModalLabel">Respinge</h2>
+                <button type="button" class="text-xlarge close-btn-modal w-100 text-end-ic" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea name="rejectText" id="rejectText" rows="4" class="form-control input-sm"> </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="sc-general-btn ic-active" id="btn-reject">Respinge</button>
+                <button type="button" class="sc-general-btn ic-active" data-bs-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="markAsRezolvedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xxlarge28 wheight500 text-no-wrap" id="exampleModalLabel">Marcheaza ca rezolvat</h2>
+                <button type="button" class="text-xlarge close-btn-modal w-100 text-end-ic" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea name="markAsRezolvedText" id="markAsRezolvedText" rows="4" class="form-control input-sm"> </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="sc-general-btn ic-active" id="btn-markAsRezolved">Marchează că rezolvat</button>
+                <button type="button" class="sc-general-btn ic-active" data-bs-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="assignToDepartamentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xxlarge28 wheight500 text-no-wrap" id="exampleModalLabel">Atribuie la departament</h2>
+                <button type="button" class="text-xlarge close-btn-modal w-100 text-end-ic" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 mb-2">
+                    <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="AssignToDepartment.DepartamentId"></label>
+                    <select asp-for="AssignToDepartment.DepartamentId" asp-items="@Model.AssignToDepartment.Departaments" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-std-width"></select>
+                </div>
+                <div class="mt-2 mb-2" style="display:none" id="teamIdContainer">
+                    <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="AssignToDepartment.TeamId"></label>
+                    <select asp-for="AssignToDepartment.TeamId" class="form-control sc-custom-inputs form-input sc-std-width"></select>
+                </div>
+                <textarea name="assignToDepartamentText" id="assignToDepartamentText" rows="4" class="form-control input-sm"> </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="sc-general-btn ic-active" id="btn-assignToDepartament">Atribuie la departament</button>
+                <button type="button" class="sc-general-btn ic-active" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

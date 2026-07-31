@@ -1,0 +1,91 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Web.Models.RoadInfrastructure
+@using SmartCity.Domain.Models.Enums
+@model DetectionDataModel
+
+@{
+    string severityClass = Model.Severity.Description() switch
+    {
+        "Medie" => "severity-class medium-severity",
+        "Remediata" => "severity-class repaired-severity",
+        "Scazuta" => "severity-class small-severity",
+        "Critica" => "severity-class critical-severity",
+        "Ridicata" => "severity-class bigger-severity",
+        _ => ""
+    };
+}
+
+@{
+    string resolutionClass = Model.ResolutionStatus.Description() switch
+    {
+        "Raportată" => "severity-class medium-severity",
+        "Rezolvată" => "severity-class repaired-severity",
+        "In curs de rezolvare" => "severity-class small-severity",
+        _ => ""
+    };
+}
+
+@{
+    string needInterventionClass = Model.NeedIntervention.Description() switch
+    {
+        "Da" => "severity-class yes-severity",
+        "Nu" => "severity-class no-severity",
+        _ => ""
+    };
+}
+
+<div class="sc-info-table-container">
+    <div class="category-container mb-2">
+        <div class="text-small wheight600 mb-2">Categorie</div>
+        <div class="text-xsmall wheight400">@Model.Category.Description()</div>
+    </div>
+  
+    <div class="description-container mb-2">
+        <div class="text-small wheight600 mb-2">Descriere</div>
+        <div class="text-xsmall wheight400">@Model.Description</div>
+    </div>
+
+    <div class="details-container">
+        <div class="details-col-one">
+            <div>
+                <p class="text-small wheight600">Grad de periculozitate</p>
+                <p class="@severityClass text-xsmall wheight400 text-center-ic" style="margin:0">@Model.Severity.Description()</p>
+            </div>
+            <div>
+                <p class="text-small wheight600">Coordonate GPS</p>
+                <p class="text-xsmall wheight400">Lat: @Model.Lat</p>
+                <p class="text-xsmall wheight400">Lng: @Model.Lng</p>
+            </div>
+            @* <div> *@
+            @*     <p class="text-small wheight600">Raportată de</p> *@
+            @*     <p class="text-text-xxxsmall wheight400">@Model.EdgeId</p> *@
+            @* </div> *@
+
+        </div>
+        <div class="details-col-two">
+            <div>
+                <p class="text-small wheight600">Necesită intervenție</p>
+                <p class="@needInterventionClass text-center-ic text-xsmall wheight400" style="margin:0">@Model.NeedIntervention.Description()</p>
+            </div>
+            <div>
+                <p class="text-small wheight600">Status rezolvare</p>
+                <p class="@resolutionClass text-xsmall wheight400 text-center-ic" style="margin:0">@Model.ResolutionStatus.Description()</p>
+            </div>
+            <div>
+                <p class="text-small wheight600">Data raportării</p>
+                <p class="text-xsmall wheight400">@Model.ReportingDate</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-container mb-3">
+        <div class="text-small wheight600 mb-4">Comentariu</div>
+        <textarea></textarea>
+    </div>
+
+   
+
+    <button class="sc-general-btn info-update-btn text-small" type="submit">Actualizează</button>
+
+</div>
+

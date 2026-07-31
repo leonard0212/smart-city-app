@@ -1,0 +1,37 @@
+﻿@model LoginViewModel
+
+<link rel="stylesheet" href="~/css/LoginPage.css" asp-append-version="true" />
+
+<div class="login-top-bar">
+    <div><span class="color-secondary-text wheight500">SmartCity </span></div>
+</div>
+
+<div class="login-container">
+    <h1 class="color-primary-text title-xxxlarge32">Autentificare</h1>
+    <form asp-controller="authentication" asp-action="login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group mb-4">
+            <input asp-for="Username" class="form-control sc-custom-inputs form-input" placeholder="Username" autocomplete="off" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-4">
+            <input asp-for="Password" class="form-control sc-custom-inputs form-input" placeholder="Password" autocomplete="off" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-4">
+            <div class="checkbox pull-right">
+                <label asp-for="RememberMe">
+                    <input asp-for="RememberMe" />
+                    RememberMe
+                </label>
+            </div>
+        </div>
+        <div class="center-flex-justify-between">
+            <button type="submit" class="login-btn sc-general-btn text-small color-primary-text">Login</button>
+            <a asp-action="ForgotPassword" asp-route-username="@Model.Username" class="pull-right">
+                <small>ForgotPassword</small>
+            </a>
+        </div>
+ 
+    </form>
+</div>

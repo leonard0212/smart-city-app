@@ -1,0 +1,135 @@
+﻿@using SmartCity.Domain
+@using SmartCity.Domain.Extensions
+@using SmartCity.Domain.ServiceModels.RawDetection
+@using SmartCity.Web.Models.Admin
+@model FilteredRawDetectionModel
+
+@{
+    ViewBag.Title = "Raw Detections To Process";
+}
+
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdminPage.css" asp-append-version="true" />
+
+
+
+
+<div class="sc-admin-container">
+    <div class="table-wrapper">
+        <h2>
+            Detectări de procesat
+        </h2>
+    </div>
+    <div class="w-100-ic d-flex-ic gap20 center-flex-align mt-1">
+        <div class="" id="pagination">
+            <partial name="_Pagination" model="Model.list" />
+        </div>
+        <div class="center-flex-justify-between gap10 w-100-ic">
+            <div class="center-flex-align gap10">
+                <label for="pageSizeInput" class="form-label mb-0">Items per page:</label>
+
+                <input type="number"
+                       id="pageSizeInput"
+                       name="PageSize"
+                       min="1"
+                       max="1000"
+                       value="@(Model.list?.PageSize ?? 10)"
+                       class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"
+                       style="width: 90px;" />
+
+                <button type="button"
+                        id="applyPageSizeBtn"
+                        class="sc-general-btn admin-table title-xsmall">
+                    Apply
+                </button>
+           </div>
+            
+
+            <div id="bulkActionsBar" class="center-flex-align gap10" style="display:none;">
+                <span id="selectedCount" class="title-xsmall color-secondary-text"></span>
+                <button type="button" id="btnDeleteSelected" class="sc-general-btn admin-table title-xsmall mx-3">
+                    Delete selected
+                </button>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper" style=" overflow-y: auto;overflow-x: hidden;height:75vh">
+        <table class="table sc-table table-hover table-responsive table-sm">
+            <thead>
+                <tr class="text-xsmall wheight600 text-center-ic">
+                    <th scope="col">#</th>
+                    <th scope="col">MainClass</th>
+                    <th scope="col">SubClass</th>
+                    <th scope="col">Lat</th>
+                    <th scope="col">Lng</th>
+                    <th scope="col">ProcessStatus</th>
+                    <th scope="col">CreatedAt</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col" style="width:100px;" class="px-2">
+                        <div class="d-flex" style="justify-content:end">
+                            <label class="px-2">Select all</label>
+                            <input type="checkbox" id="selectAllRows" />
+                        </div>                      
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.list)
+                {
+                    var dataContent = Model.info.FirstOrDefault(x => x.Id == item.Id);
+
+                    <tr class="text-xxsmall wheight400 text-center-ic">
+                        <th scope="row">@(Model.list.IndexOf(item) + 1)</th>
+                        <td>@item.MainClass</td>
+                        <td>@item.SubClass</td>
+                        <td>@item.Lat</td>
+                        <td>@item.Lng</td>
+                        <td>@item.ProcessStatus</td>
+                        <td>@item.CreatedAt</td>
+                        <td style="width:160px"><button type="button" class="sc-general-btn admin-table title-xsmall btn-import-raw-data" data-id="@item.Id"><i class="fa-solid fa-file-import me-3"></i>Import</button></td>
+                        <td style="width:160px"><button type="button" class="sc-general-btn admin-table title-xsmall btn-delete-raw-data" data-id="@item.Id"><i class="fa-solid fa-trash me-3"></i>Delete</button></td>
+                        <td class="text-end-ic px-2">
+                            <input type="checkbox" class="row-select" data-id="@item.Id" />
+                        </td>
+                    </tr>
+
+                    <tr class="text-xxsmall wheight400 text-center-ic">
+                        <td colspan="3">
+                            <div class="rawDetectionImgContainer" data-id="@item.Id">
+                                <img class="preview-img" data-id="@item.Id"
+                                     src="~/Assets/Images/photoPlaceholder.png"
+                                     style="max-width:100%; max-height:210px; border-radius: 12px;min-width:222px;max-width:222px;"
+                                     onerror="this.onerror=null;this.src='~/Assets/Images/photoPlaceholder.png" />
+                            </div>
+                        </td>
+                        <td colspan="10">
+                            <div class="rawDetectionDataContainer" data-id="@item.Id">
+                                @if (dataContent.Infos != null)
+                                {
+                                    foreach (var aa in dataContent.Infos)
+                                    {
+                                        <dt>@aa.Key</dt>
+                                        <dd>@aa.Value</dd>
+                                        <br />
+                                    }
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+@* <div class="m-2" style="min-height:29px;">
+    <partial name="_PaginationWithParamsAndCount" model="Model.list" />
+</div> *@
+
+

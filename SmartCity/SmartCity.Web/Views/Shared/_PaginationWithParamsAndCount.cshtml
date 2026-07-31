@@ -1,0 +1,23 @@
+﻿@using SmartCity.Domain
+@model IPagedList
+
+@{
+    var defaultShowTotalCount = Convert.ToBoolean(ViewBag.ShowTotalCount);
+    var paginationParamsAdded = Convert.ToBoolean(ViewBag.PaginationParamsAdded);
+    ViewBag.ShowTotalCount = true;
+}
+
+
+@if (!paginationParamsAdded)
+{
+    ViewBag.PaginationParamsAdded = true;
+    <input type="hidden" id="PersistentCount" value="@Model.TotalCount" />
+    <input type="hidden" id="PageSize" value="@Model.PageSize" />
+    <input type="hidden" id="Order" name="Order" value="@Model.Order" />
+}
+
+<partial name="_Pagination" />
+
+@{
+    ViewBag.ShowTotalCount = defaultShowTotalCount;
+}

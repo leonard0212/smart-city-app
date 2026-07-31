@@ -1,0 +1,70 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Web.Models.Departament
+@model DepartamentInfoViewModel
+
+<link rel="stylesheet" href="~/css/DepartmentPage.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+
+
+<input asp-for="Id" type="hidden" />
+<div class="sc-dep-container">
+
+    <div class="px-4">
+        <div class="title-large">@Model.Name</div>
+        <div class="text-xsmall"><span class="wheight600">Id: </span><span>@Model.Id</span></div>
+        <div class="text-xsmall"><span class="wheight600">Data si ora: </span><span>@Model.CreatedAt</span></div>
+    </div>
+
+    <form asp-controller="Department" asp-action="AddTeam" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form" class="w-100" style="padding: 10px 20px;">
+        <div class="d-flex-ic gap20">
+            <input asp-for="Id" type="hidden" />
+            <div class="form-group col sc-std-width">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400">Nume echipa</label>
+                <input id="Name" type="text" class="form-control sc-custom-inputs form-input sc-std-width mt-2" name="Name">
+            </div>
+            <div class="bottom-flex">
+                <button type="submit" class="sc-general-btn ic-active text-small" style="width:200px;height:35px">Adaugă echipa</button>
+            </div>
+        </div>
+    </form>
+
+    <h5>Echipe:</h5>
+
+    <table class="table table-hover table-responsive table-sm sc-table">
+        <thead>
+            <tr class="text-xsmall wheight600 text-center-ic">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Members</th>
+                <th scope="col">CreatedAt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Teams)
+            {
+                <tr class="text-xxsmall wheight400 text-center-ic text-center-ic">
+                    <th scope="row">@(Model.Teams.IndexOf(item) + 1)</th>
+                    <td>@item.Name</td>
+                    <td>@item.TeamMemberships.Count()</td>
+                    <td>@item.CreatedAt.ToFullPrintDate()</td>
+                    <td>
+                        <a href="@Url.Action("Teaminfo", "Department", new {Id = item.Id} )" class="info-table-view clear-decoration" target="_blank">
+                            <i class="fa-regular fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/departement.js"></script>
+}

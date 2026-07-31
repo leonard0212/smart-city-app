@@ -1,0 +1,119 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Web.Models.Detection
+@model DetectionViewModel
+
+@{
+    string severityClass = Model.Severity.Description() switch
+    {
+        "Medie" => "severity-class medium-severity",
+        "Remediata" => "severity-class repaired-severity",
+        "Scazuta" => "severity-class small-severity",
+        "Critica" => "severity-class critical-severity",
+        "Ridicata" => "severity-class bigger-severity",
+        _ => ""
+    };
+    }
+
+@{
+    string resolutionClass = Model.ResolutionStatus.Description() switch
+    {
+        "Raportată" => "severity-class medium-severity",
+        "Rezolvată" => "severity-class repaired-severity",
+        "In curs de rezolvare" => "severity-class small-severity",
+        _ => ""
+    };
+}
+
+@{
+    string needInterventionClass = Model.NeedIntervention.Description() switch
+    {
+        "Da" => "severity-class yes-severity",
+        "Nu" => "severity-class no-severity",
+        _ => ""
+    };
+}
+
+@* <div class="row">
+    <dl class="col-md-4">
+        <dt>Departament</dt>
+        <dd>@Model.DepartamentName</dd>
+    </dl>
+    <dl class="col-md-4">
+        <dt>Echipa</dt>
+        <dd>@Model.TeamName</dd>
+    </dl>
+    <dl class="col-md-4">
+        <dt>Categorie</dt>
+        <dd>@Model.Category.Description()</dd>
+    </dl>
+    <dl class="col-md-4">
+        <dt>Descriere</dt>
+        <dd>@Model.Description</dd>
+    </dl>
+
+    <dl class="col-md-4">
+        <dt>Grad de periculozitate</dt>
+        <dd>@Model.Severity.Description()</dd>
+    </dl>
+
+    <dl class="col-md-4">
+        <dt>Status rezolvare</dt>
+        <dd>@Model.ResolutionStatus.Description()</dd>
+    </dl>
+    <dl class="col-md-4">
+        <dt>Data raportării</dt>
+        <dd>@Model.ReportingDate</dd>
+    </dl>
+</div> *@
+
+
+<div class="detection-card">
+  <div class="detection-card__top">
+    <span class="pill pill--dept">
+      <span class="pill__chev">Departament: </span>
+      @Model.DepartamentName
+    </span>
+
+    <span class="pill pill--team">
+      <span class="pill__chev">Echipa: </span>
+      @Model.TeamName
+    </span>
+
+        <span class="rawDetectionImgContainer field" data-id="@Model.RawDataId">
+            <img class="preview-img" data-id="@Model.RawDataId"
+                 src="~/Assets/Images/photoPlaceholder.png"
+                 style="max-width:100%; max-height:40px; border-radius: 12px;min-width:22px;max-width:222px;"
+                 onerror="this.onerror=null;this.src='~/Assets/Images/photoPlaceholder.png" />
+        </span>
+  </div>
+
+  <div class="detection-card__grid">
+
+
+    <div class="field">
+      <span class="field__label">Categorie</span>
+      <p class="field__value">@Model.Category.Description()</p>
+    </div>
+
+    <div class="field">
+      <span class="field__label">Descriere</span>
+      <p class="field__value">@Model.Description</p>
+    </div>
+
+    <div class="field">
+      <span class="field__label">Grad de periculozitate</span>
+            <p class="text-center-ic text-xsmall wheight400 @severityClass" style="margin:0">@Model.Severity.Description()</p>
+    </div>
+
+    <div class="field">
+      <span class="field__label">Status rezolvare</span>
+            <p class="text-center-ic text-xsmall wheight400 @resolutionClass" style="margin:0; max-width:fit-content">@Model.ResolutionStatus.Description()</p>
+    </div>
+
+    <div class="field">
+      <span class="field__label">Data raportării</span>
+      <p class="field__value">@Model.ReportingDate</p>
+    </div>
+  </div>
+</div>
+

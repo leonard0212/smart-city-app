@@ -1,0 +1,45 @@
+﻿@model Dictionary<string, object>
+
+@{
+    var igneoredValues = new List<string>() { "Id", "CreatedAt" };
+}
+
+
+
+
+<div class="specific-info-container flex-wrap">
+    @foreach (var item in Model.Where(x => !igneoredValues.Contains(x.Key)))
+    {
+        string value = item.Value?.ToString();
+
+        if (value == "Medium")
+        {
+            <div class="specific-info-item col-6 mt-3">
+                <div class="text-small wheight600">@item.Key</div>
+                <div class="severity-class medium-severity text-center-ic mt-2 text-xsmall wheight400" style="margin:0">@value</div>
+            </div>
+        }
+        else if (value == "High")
+        {
+            <div class="specific-info-item col-6 mt-3">
+                <div class="text-small wheight600">@item.Key</div>
+                <div class="severity-class bigger-severity text-center-ic mt-2 text-xsmall wheight400" style="margin:0">@value</div>
+            </div>
+        }
+        else if (value == "Small")
+        {
+            <div class="specific-info-item col-6 mt-3">
+                <div class="text-small wheight600">@item.Key</div>
+                <div class="severity-class small-severity text-center-ic mt-2 text-xsmall wheight400" style="margin:0">@value</div>
+            </div>
+        }
+        else
+        {
+            <div class="specific-info-item col-6 mt-3">
+                <div class="text-small wheight600">@item.Key</div>
+                <div class="text-xsmall wheight400 mt-2">@item.Value</div>
+            </div>
+        }
+    }
+
+</div>

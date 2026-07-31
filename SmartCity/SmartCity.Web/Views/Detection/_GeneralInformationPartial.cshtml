@@ -1,0 +1,40 @@
+﻿@using SmartCity.Web.Models.Detection
+@model DetectionViewModel
+
+@{
+    var imgdata = $"data:image/png;base64, {Model.FileDatabase64}";
+}
+
+
+<div id="homeTab2" class="tab-pane h-100-ic" style="">
+    <div class="info-box-container tab2 info-box-container-top">
+        <div class="home-box-one tab2">
+            <div class="home-box-one-contain">
+                <div class="images-container center-flex flex-column" id="tab2-picture">
+                    <button type="button" class="sc-general-btn ic-active text-small sc-sm-width">
+                        Close                        
+                    </button>
+                    <img id="detectionImg" src="@imgdata">
+                </div>
+            </div>
+        </div>
+        <div class="home-box-two tab2" style="background-color: #ffffff;">
+            <div class="home-box-two-contain h-100 flex-column" id="tab2-category">
+                <partial name="_Flow2Partial" model="Model.FlowData" />
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box-container tab2 info-box-container-bottom" style="margin-top:22px">
+        <div class="home-box-one tab2">
+            <div id="map2" style="height: 100%;"></div>
+        </div>
+        <div class="home-box-two tab2">
+            <div class="home-box-two-contain h-100" id="tab2-detail">
+                <partial name="_DetectionCommonData" model="@Model" />
+                <partial name="_SpecificInfoPartial" model="@Model.SpecificInfo" />
+            </div>
+        </div>
+    </div>
+   
+</div>

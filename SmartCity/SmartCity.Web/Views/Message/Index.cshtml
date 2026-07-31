@@ -1,0 +1,36 @@
+﻿@model List<SmartCity.Web.Models.Message.MessageViewModel>
+<link rel="stylesheet" href="~/css/MessagePage.css" asp-append-version="true" />
+
+
+
+<div class="sc-mes-page-container">
+    <div class="sc-mes-structure">
+        <div class="d-flex-ic flex-column gap20">
+            <h1 class="mb-5 title-regular mt-4">Toate mesajele</h1>
+            <div>
+                <button class="sc-general-btn home-tab-btn text-small" id="showTrashDepartmentMessages">Salubritate</button>
+            </div>
+            <div>
+                <button class="sc-general-btn home-tab-btn text-small" id="showRoadInfrastructureMessages" style="width: 210px">Infrastructura rutiera</button>
+            </div>
+            <div>
+                <button class="sc-general-btn home-tab-btn text-small" id="showPublicDomainMessages">Spatii verzi</button>
+           </div>
+            
+        </div>
+    </div>
+    <div class="sc-mes-container">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var message = Model[i];
+            var cssClass = i % 2 == 0 ? "message-0" : "message-1";
+
+            <div class="message-box-container @cssClass">
+                <div class="team-box text-small">@message.TeamName</div>
+                <div class="message-box text-xsmall">@message.MessageText</div>
+                <div class="date-box text-small">@message.CreatedAt.ToString("f")</div>
+            </div>
+        }
+    </div>
+   
+</div>

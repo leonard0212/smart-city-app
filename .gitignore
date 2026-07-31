@@ -1,0 +1,6 @@
+.vs/
+
+# Files over GitHub's 100MB limit — delivered separately
+SmartCityJetson/cuda_wheels/torch-2.6.0-cp310-cp310-linux_aarch64.whl
+SmartCityJetson/cuda_wheels/onnxruntime_gpu-1.20.2-cp310-cp310-linux_aarch64.whl
+SmartCityJetson/TESTE/Video/4K.mp4

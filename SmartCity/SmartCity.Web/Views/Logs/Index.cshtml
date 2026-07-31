@@ -1,0 +1,44 @@
+﻿@using SmartCity.Core.Utils
+@using SmartCity.Domain.Models.Logs
+@model List<MessageBrokerDataLogs>
+
+
+@{
+    ViewData["Title"] = "Logs";
+}
+
+<table class="table table-hover table-responsive table-sm">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">State</th>
+            <th scope="col">Logged</th>
+            <th scope="col">QueueName</th>
+            <th scope="col">Subject</th>
+            <th scope="col">EdgeId</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var state = JsonUtils.GetValueByKey(item?.Body?.ToString(), "State");
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    <a href="@Url.Action("ViewMessageBusLog", "Logs", new {Id = item.Id} )" class="info-table-view clear-decoration grid-view-btn" target="_blank">
+                        <i class="fa-regular fa-eye"></i>
+                    </a>
+
+
+                </td>
+                <td>@state</td>
+                <td>@item.Logged</td>
+                <td>@item.QueueName</td>
+                <td>@item.Subject</td>
+                <td>@item.EdgeId</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

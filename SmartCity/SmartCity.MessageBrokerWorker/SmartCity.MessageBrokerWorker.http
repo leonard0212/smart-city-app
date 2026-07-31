@@ -1,0 +1,6 @@
+@SmartCity.MessageBrokerWorker_HostAddress = http://localhost:5034
+
+GET {{SmartCity.MessageBrokerWorker_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

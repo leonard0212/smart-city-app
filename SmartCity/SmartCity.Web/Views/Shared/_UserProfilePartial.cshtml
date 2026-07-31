@@ -1,0 +1,27 @@
+﻿<div class="text-center">
+    <i class="fa-solid fa-user-nurse"></i>
+</div>
+<a data-bs-toggle="dropdown" class="dropdown-toggle" id="superUserDropdownMenuLink"  href="#">
+    <span class="clear">
+        <span class="block m-t-xs"><strong class="font-bold"> @Security.User <b class="caret"></b></strong></span>
+        <span class="text-muted text-xs block">@Security.User?.Account.CompanyName</span>
+    </span>
+</a>
+<ul class="dropdown-menu animated fadeInRight m-t-xs" aria-labelledby="superUserDropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Profile</a></li>
+    <li>
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-impersonate">
+            Impersonare utilizator
+        </a>
+    </li>
+    @if (User.HasClaim("IsImpersonating", "true"))
+    {
+        <li>
+            <a class="dropdown-item" asp-controller="Auth" asp-action="StopImpersonation">
+                Stop impersonare
+            </a>
+        </li>
+    }
+    <li class="divider"></li>
+    <li><a href="#" class="logoutLink">Logout</a></li>
+</ul>

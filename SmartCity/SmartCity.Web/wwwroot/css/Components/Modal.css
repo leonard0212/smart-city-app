@@ -1,0 +1,264 @@
+﻿/*#createUserModal.modal.show {
+    display: flex !important;
+    width: auto !important;
+    height: auto !important;
+    position: absolute !important;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}*/
+
+.modal-backdrop.show {
+    display: none;
+}
+
+.modal-header, .modal-footer, .modal-body {
+    padding: 0px;
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px 0px;
+}
+
+    .modal-body textarea {
+        min-height: 200px;
+        border-radius: 12px;
+    }
+
+.modal-dialog {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px !important;
+    margin: 0 auto;
+}
+
+.modal-content {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    background: #fff;
+    padding: 30px 60px 50px 60px;
+    border: 1px solid #DCD9D9;
+    border-radius: 16px;
+    margin: 30px;
+    width: 100%;
+    min-height: 400px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
+
+/*//assignToDepartamentModal*/
+
+#assignToDepartamentModal .modal-dialog {
+    max-width: 1100px !important;
+}
+
+#assignToDepartamentModal .modal-body {
+    flex-direction: row;
+}
+
+.dep-sel-container, .calendar-container {
+    flex: auto;
+}
+
+.calendar-container {
+    justify-content: center;
+}
+
+/*Calendar design*/
+/* Optional: Adjust calendar appearance */
+.flatpickr-calendar {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #000 !important;
+    box-shadow: none !important;
+}
+
+.calendar-contain {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #D5D3D3;
+    border-radius: 12px;
+    padding: 10px
+}
+/* Selected range styling */
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.inRange {
+    background-color: #007bff;
+    color: #000000;
+    font-weight:600;
+    border-radius: 50px;
+}
+
+.flatpickr-day.inRange, .flatpickr-day.selected.startRange, .flatpickr-day.selected.endRange {
+    background: #8be188 !important;
+    border-color: #8be188;
+    color:#000000;
+}
+    /* Style free days with different color */
+    /*.flatpickr-day.free-day {
+    background-color: #c3f0b4;
+    border: 2px dashed #60b347;
+    color: #0f3e10;
+    font-weight: 600;
+}
+*/
+    /* Optional: Add hover effects */
+    .flatpickr-day:hover {
+        background-color: #f0f0f0;
+    }
+
+/* Prevent hover override on custom-marked days */
+.flatpickr-day.free-day:hover {
+    background-color: #c3f0b4 !important;
+}
+
+.flatpickr-months .flatpickr-month, .flatpickr-current-month .flatpickr-monthDropdown-months, .flatpickr-weekdays, span.flatpickr-weekday {
+    background: #ffffff !important;
+    color: #000 !important;
+    fill: #000 !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+}
+
+.flatpickr-calendar svg {
+    fill: #000 !important;
+}
+
+.flatpickr-days, .flatpickr-innerContainer {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.flatpickr-day.today {
+    background: #a20032ff;
+    color: #fff;
+    font-weight: 700;
+}
+
+.flatpickr-day {
+    max-width: 32px !important;
+    height: 32px !important;
+    margin: 6px 0px !important;
+    line-height: 32px !important;
+}
+
+    .flatpickr-day.occupied-day {
+        position: relative;
+        background: repeating-linear-gradient(135deg, #f3c0c0, #f3c0c0 6px, #ffe1e1 6px, #ffe1e1 12px);
+        color: #555 !important;
+    }
+
+        .flatpickr-day.occupied-day.inRange {
+            background: repeating-linear-gradient(135deg, #f3c0c0, #f3c0c0 6px, #ffe1e1 6px, #ffe1e1 12px)!important;
+        }
+
+        .flatpickr-day.occupied-day,
+        .flatpickr-day.occupied-day:hover {
+            cursor: not-allowed;
+        }
+
+    /* Capetele și interiorul unui interval ocupat (opțional, pt. aspect mai clar) */
+    .flatpickr-day.occupied-start,
+    .flatpickr-day.occupied-end,
+    .flatpickr-day.occupied-inrange {
+        border-radius: 50px;
+        font-weight: 600;
+    }
+
+    .flatpickr-day.inRange.occupied-day {
+        color: #a20032!important;
+        background: repeating-linear-gradient(135deg, #f3c0c0, #f3c0c0 6px, #ffe1e1 6px, #ffe1e1 12px)
+    }
+    /*Image view container*/
+    .absolute-div-container {
+        display: none;
+        position: absolute;
+        width: fit-content;
+        min-width: 1070px;
+        min-height: 690px;
+        max-height: 85vh;
+        max-width: 71vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-42%, -50%);
+        background-color: #fff;
+        border: 2px solid #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        z-index: 1000;
+        border-radius: 22px;
+    }
+
+    .absolute-div-container .close-btn {
+        display: inline-block;
+        padding: 5px 10px;
+    }
+
+.generic-filter-controls {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: none;
+    gap: 5px;
+    z-index: 1000;
+}
+
+
+    .generic-filter-controls button {
+        width: 50px;
+        height: 26px;
+        font-size: 15px;
+        border: 1px solid #fff;
+        background-color: #ff0000cf;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+.image-container, .image-container2 {
+    min-height: 535px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+    .image-container2 img.zoomable-img {
+        width: auto !important;
+        max-width: none !important;
+        min-width: auto !important;
+        margin-left: 265px!important;
+    }
+
+    #imageTab {
+        display: none;
+    }
+
+.nav.nav-tabs.sc-tabs {
+    margin-right: 235px;
+}
+
+.nav-link.sc-tabs {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.zoomable-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    user-select: none;
+    transition: transform 0.1s ease;
+}
+/*End Image view container*/

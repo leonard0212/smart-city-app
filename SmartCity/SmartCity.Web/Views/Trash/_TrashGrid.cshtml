@@ -1,0 +1,64 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Domain.Models.Enums
+@using SmartCity.Web.Models.Trash
+@model List<TrashInfoModel>
+@{
+
+    string GetCategoryColor(TrashAssetCategory category)
+    {
+        switch (category)
+        {
+            case TrashAssetCategory.TrashBagUncollected:
+                return "severity-class critical-severity";
+            case TrashAssetCategory.TrashCanUncollected:
+                return "severity-class repaired-severity";
+            case TrashAssetCategory.TrashCanOk:
+                return "severity-class small-severity";
+            default:
+                return "primary";
+
+        }
+    }
+}
+
+<div class="sc-info-table-container">
+    <div class="mb-3">
+        <span class="text-small wheight600 me-4">Interval</span>
+        <input type="date" class="sc-input date-select" id="startDateRoadInfrastructure" />
+        <input type="date" class="sc-input date-select" id="endDateRoadInfrastructure" />
+    </div>
+
+    <div>
+        <p class="text-small wheight600">Probleme semnalate</p>
+        <div class="table-wrapper">
+            <table class="table table-hover table-responsive table-sm sc-table">
+                <thead>
+                    <tr class="text-xsmall wheight600 text-center-ic">
+                        <th scope="col">#</th>
+                        <th scope="col">Categorie</th>
+                        <th scope="col">Gravitatea problemei</th>
+                        <th scope="col">Data</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="text-xxsmall wheight400 text-center-ic">
+                            <th scope="row">@(Model.IndexOf(item) + 1)</th>
+                            <td>
+                                <div class="@GetCategoryColor(item.TrashAssetCategory)">
+                                    @item.TrashAssetCategory.Description()
+                                </div>
+
+                            </td>
+                            <td>@item.TrashVolumType.Description() </td>
+                            <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
+                            <td><button type="button" class="info-table-view clear-decoration grid-view-btn" data-id="@item.Id"><i class="fa-regular fa-eye"></i></button></td>
+                        </tr>
+                    } 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

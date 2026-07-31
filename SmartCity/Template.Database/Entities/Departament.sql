@@ -1,0 +1,13 @@
+CREATE TABLE [dbo].[Departament](
+	[Id] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
+	[Name] [nvarchar](500) NULL,
+	[CreatedAt] [datetime] NULL,
+ CONSTRAINT [PK_Departament] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Departament] ADD  CONSTRAINT [DF_Departament_Id]  DEFAULT (newid()) FOR [Id]
+GO

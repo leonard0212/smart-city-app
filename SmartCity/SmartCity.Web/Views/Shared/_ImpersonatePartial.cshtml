@@ -1,0 +1,26 @@
+﻿<div id="modal-impersonate" class="modal inmodal in" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Impersonate User</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Auth" asp-action="ImpersonateUser" method="post" role="form" id="formImpersonate">
+                    <div class="form-group required">
+                        <label for="ImpersonateUsername"></label>
+                        <input name="Username" id="ImpersonateUsername" class="form-control" autocomplete="off" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formImpersonate" asp-controller="Authentication" asp-action="ImpersonateUser">
+                    <i class="fa fa-user-secret"></i> Impersonate
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

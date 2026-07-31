@@ -1,0 +1,68 @@
+﻿@using SmartCity.Web.Models.Departament
+@model DepartamentFilterViewModel
+
+
+<link rel="stylesheet" href="~/css/DepartmentPage.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+
+<div class="sc-dep-container">
+    <div class="" data-controller="Department" data-action="GetDepartaments" id="departament-filter" style="padding: 10px 20px;">
+        <div class="d-flex-ic gap20">
+            <div class="form-group col sc-std-width">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="Name">Nume departament căutat</label>
+                <input asp-for="Name" class="form-control sc-custom-inputs form-input sc-std-width mt-2" />
+            </div>
+            <div class="bottom-flex">
+                <button type="button" id="btnFilter" class="sc-general-btn ic-active text-small" style="width:200px;height:35px">Caută departament</button>
+            </div>
+        </div>
+    </div>
+
+    <form asp-controller="Department" asp-action="AddDepartment" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form" class="w-100" style="padding: 10px 20px;">
+        <div class="d-flex-ic gap20">
+            <div class="form-group col sc-std-width">
+                <label class="control-label px-2 mb-2 text-xsmall wheight400">Nume departament adaugat</label>
+                <input id="Name" type="text" class="form-control sc-custom-inputs form-input sc-std-width mt-2" name="Name">
+            </div>
+            <div class="bottom-flex">
+                <button type="submit" class="sc-general-btn ic-active text-small" style="width:200px;height:35px">Adaugă departament</button>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="pagination-results filter-pagination mt-2" data-filter-id="#departament-filter" data-filter-on-load="true">
+    </div>
+
+
+  @*   <button onclick="loadGantt()">Load Gantt</button>
+    <div id="ganttContainer">
+     
+    </div> *@
+</div>
+
+@* <script type="text/javascript" src="~/js/GranttChart.js" asp-append-version="true"></script> *@
+
+@* <script>
+    function loadGantt() {
+        console.log("click")
+        const id = '1';
+        fetch('/Department/GetGanttChartPartial?departamentId=' + id)
+            .then(res => res.text())
+            .then(html => {
+                const container = document.getElementById('ganttContainer');
+                container.innerHTML = html;
+
+                const scripts = container.querySelectorAll("script");
+                scripts.forEach(script => {
+                    const s = document.createElement("script");
+                    s.text = script.textContent;
+                    document.body.appendChild(s);
+                });
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadGantt);
+</script> *@
+

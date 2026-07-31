@@ -1,0 +1,95 @@
+﻿@using SmartCity.Domain.Extensions
+@using SmartCity.Web.Models.RoadInfrastructure
+@model RoadInfrastructureDataModel
+
+@{
+    string severityClass = Model.Severity.Description() switch
+    {
+        "Medie" => "severity-class medium-severity",
+        "Remediata" => "severity-class repaired-severity",
+        "Scazuta" => "severity-class small-severity",
+        "Critica" => "severity-class critical-severity",
+        "Ridicata" => "severity-class bigger-severity",
+        _ => ""
+    };
+}
+
+<div class="center-flex-justify-between flex-column h-100">
+    <div class="row">
+        <div class="col-sm-6">
+            <dl>
+                <dt class="mb-2 text-small wheight600">Grad de periculozitate</dt>
+                <dd style="margin:0" class="@severityClass text-center-ic text-xsmall wheight400">@Model.Severity.Description()</dd>
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl>
+                <dt class="mb-2 text-small wheight600">Necesita interventie</dt>
+                <dd style="margin:0" class="@severityClass text-center-ic text-xsmall wheight400">@Model.NeedIntervention.Description()</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <dl>
+                <dt class="mb-2 text-small wheight600">Coordonate Gps</dt>
+                <dd class="text-xsmall wheight400">Lat: @Model.Lat ; Lng: @Model.Lng</dd>
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl>
+                <dt class="mb-2 text-small wheight600">Status rezolvare</dt>
+                <dd style="margin:0" class="@severityClass text-center-ic text-xsmall wheight400">@Model.ResolutionStatus.Description()</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row" style="border-bottom: 2px solid #DCD9D9;">
+        <div class="col-sm-6">
+            <dl>
+                <dt class="mb-2 text-small wheight600">Raportat de</dt>
+                <dd class="text-xsmall wheight400">@Model.EdgeId.ToString()</dd>
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl>
+                <dt class="mb-2 text-small wheight600">Raportat de</dt>
+                <dd class="text-xsmall wheight400">@Model.EdgeId.ToString()</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="btn-group-ic center-flex-justify-around w-100">
+        <button class="sc-general-btn info-update-btn text-small" type="button">Atribuie</button>
+        <button class="sc-general-btn info-update-btn text-small" type="button">Rezolvat</button>
+    </div>
+</div>
+
+
+@* <div class="row"> *@
+@*     <div class="col-sm-6"> *@
+@*         <dl> *@
+@*             <dt>Grad de periculozitate</dt> *@
+@*             <dd>@Model.Severity.Description()</dd> *@
+@*             <dt>Coordonate Gps</dt> *@
+@*             <dd>Lat: @Model.Lat ; Lng: @Model.Lng</dd> *@
+
+@*             <dt>Raportat de</dt> *@
+@*             <dd>@Model.EdgeId.ToString()</dd> *@
+@*         </dl> *@
+@*     </div> *@
+@*     <div class="col-sm-6"> *@
+@*         <dl> *@
+@*             <dt>Necesita interventie</dt> *@
+@*             <dd>@Model.NeedIntervention.Description()</dd> *@
+@*             <dt>Status rezolvare</dt> *@
+@*             <dd>@Model.ResolutionStatus.Description()</dd> *@
+
+@*             <dt>Raportat de</dt> *@
+@*             <dd>@Model.EdgeId.ToString()</dd> *@
+@*         </dl> *@
+@*     </div> *@
+@* </div> *@
+
+

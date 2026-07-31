@@ -1,0 +1,119 @@
+﻿@using SmartCity.Domain
+@using SmartCity.Domain.Extensions
+@using SmartCity.Domain.Models.Enums
+@using SmartCity.Web.Models.Home
+@model IPagedList<DetectionFilteredModel>
+
+@{
+
+    string GetSeverityColor(SeverityType severity)
+    {
+        switch (severity)
+        {
+            case SeverityType.Medium:
+                return "severity-class medium-severity";
+            case SeverityType.None:
+                return "severity-class repaired-severity";
+            case SeverityType.Low:
+                return "severity-class small-severity";
+            case SeverityType.Critical:
+                return "severity-class critical-severity";
+            case SeverityType.High:
+                return "severity-class bigger-severity";
+
+            default:
+                return "primary";
+
+        }
+    }
+
+    string GetNeedInterventionColor(YesNo NeedIntervention)
+    {
+        switch (NeedIntervention)
+        {
+            case YesNo.Yes:
+                return "severity-class yes-severity";
+            case YesNo.No:
+                return "severity-class repaired-severity";
+
+            default:
+                return "primary";
+
+        }
+    }
+}
+
+<input id="curentSelectedDetectionId" type="hidden" />
+
+<div class="sc-info-table-container">
+
+    <div class="sc-home table-wrapper">
+        <table class="table table-hover table-responsive table-sm sc-table">
+            <thead>
+                <tr class="text-xsmall wheight500 text-center-ic">
+                    <th scope="col" style="font-weight:500!important">#</th>
+                    <th scope="col" style="font-weight:500!important">Status</th>
+                    <th scope="col" style="font-weight:500!important">Categorie</th>
+                    <th scope="col" style="font-weight:500!important">Departament</th>
+                    <th scope="col" style="font-weight:500!important">Echipa Alocata</th>
+                    <th scope="col" style="font-weight:500!important">Severitate</th>
+                    @* <th scope="col" style="font-weight:500!important">Necesita interventie</th> *@
+                    @*         <th scope="col">Lat</th>
+                    <th scope="col">Lng</th> *@
+                    <th scope="col" style="font-weight:500!important">Data raportare</th>
+                    <th scope="col" style="font-weight:500!important">Data alocare</th>
+                    <th scope="col" style="font-weight:500!important">Data rezolvare</th>
+
+                    @* <th scope="col" style="font-weight:500!important">Departament</th> *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-xxsmall wheight400 text-center-ic detection-table-row" data-id="@item.Id">
+                        <th scope="row">@(Model.PagedIndexOf(item))</th>
+
+                        <td>@item.ResolutionStatus.Description()</td>
+
+                        <td>@item.Category.Description()</td>
+
+                        <td>@(item.Departament ?? "Neasignat")</td>
+                        <td>@(item.Team ?? "-")</td>
+                        <td>
+                            <div class="@GetSeverityColor(item.Severity)">
+                                @item.Severity.Description()
+                            </div>
+                        </td>
+
+                        @* <td>
+                            <div class="@GetNeedInterventionColor(item.NeedIntervention)" style="max-width:50px">
+                                @item.NeedIntervention.Description()
+                            </div>
+                        </td> *@
+
+                        <td>@item.ReportingDate?.ToFullPrintDate()</td>
+                        <td>@item.StartDateResolution?.ToFullPrintDate()</td>
+                        <td>@item.EndDateResolution?.ToFullPrintDate()</td>
+                        @*      <td>@item.Lat</td>
+                        <td>@item.Lng</td> *@
+
+                        <td class="showDetailsFromtable" data-id="@item.Id">
+                            @* <a href="@Url.Action("Index", "Detection", new { Id = item.Id })" class="info-table-view clear-decoration grid-view-btn" target="_blank">
+                                <i class="fa-regular fa-eye"></i>
+                            </a> *@
+                            <a href="#" class="info-table-view clear-decoration grid-view-btn" data-id="@item.Id">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="m-2" style="min-height:29px;">
+            <partial name="_PaginationWithParamsAndCount" />
+        </div>
+    </div>
+    @* <partial name="_Pagination" /> *@
+
+
+</div>

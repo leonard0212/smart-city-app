@@ -1,0 +1,374 @@
+﻿@using SmartCity.Web.Models.Home
+@model HomeModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<link rel="stylesheet" href="~/css/HomePage.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Components/Tables.css" asp-append-version="true" />
+<input id="rawDataId" type="hidden" />
+<div class="images-container center-flex flex-column" id="tab2-picture">
+    <button type="button" class="sc-general-btn ic-active text-small sc-sm-width" style="position: relative;top: 40px;right: -15%;">
+        Close
+    </button>
+    <img id="detectionImg" src="">
+</div>
+<div class="sc-home-page-container">   
+    <div>
+        <partial name="DetectionFilter" model="@Model.DetectionFilterModel" />
+    </div>
+    <div class="sc-home-middle-container row">
+        <div class="col-md-6">
+            <div class="pagination-results filter-pagination w-100-ic" data-filter-id="#docs-filter" data-filter-on-load="true">
+            </div>
+        </div>
+
+        <div class="col-md-6 sc-data-container">
+            <div class="row sc-map-container">
+                <div id="map" class="info-map-container">
+                </div>
+            </div>
+            <div class="row sc-data-insert-container">
+                <div>
+                    <div class="flow-container" id="sc-flow-container">
+                        <div class="w-100-ic h-100-ic center-flex flex-column">
+                            <div class="text-large m-w-80-ic text-center-ic">
+                                Selecteaza o detectie din tabel pentru a o atribui departamentului catre rezolvare
+                            </div>             
+                        </div>  
+                    </div>
+
+                    <div id="sc-chat-container"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    @*   <div class="sc-home-one">
+        <div class="info-interval-box-container">
+            <div class="info-interval-box">
+                <div class="interval-container">
+                    <span class="color-primary-text text-regular wheight500">Interval</span>
+                    <input type="date" class="px-2 mx-3" />
+                    <input type="date" class="px-2 mx-3" />
+                </div>
+                <div class="info-body-container">
+                    <div class="info-body">
+                        <div class="body-box-one">
+                            <span class="body-dot" id="infoReported">@Model.DetectionCount</span>
+                            <span class="title-small wheight700">Probleme semnalate</span>
+                        </div>
+                    </div>
+                    <div class="info-body">
+                        <div class="body-box-two">
+                            <span class="body-dot" id="infoAllocated">@Model.DetectionAlocatedCount</span>
+                            <span class="text-small wheight700">Probleme alocate</span>
+                        </div>
+                    </div>
+                    <div class="info-body">
+                        <div class="body-box-tree">
+                            <span class="body-dot" id="infoUnallocated">@Model.DetectionUnalocatedCount</span>
+                            <span class="text-small wheight700">Probleme nealocate</span>
+                        </div>
+                    </div>
+                    <div class="info-body">
+                        <div class="body-box-four">
+                            <span class="body-dot" id="infoSolved">@Model.DetectionSolvedCount</span>
+                            <span class="text-small wheight700">Probleme rezolvate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="info-sum-card-container">
+                <div class="sum-card">
+                    <div class="sum-card-title">
+                        <i class="fa-solid fa-recycle color-white text-large text-center-ic px-3"></i>
+                        <span class="color-white text-large text-center-ic text-no-wrap">Salubritate</span>
+                    </div>
+                    <div class="sum-card-body center-flex-justify flex-column">
+                        <div class="body-box-one">
+                            <span class="body-dot">@Model.TrashDetectionUnalocatedCount</span>
+                            <span class="text-xsmall wheight500">Probleme nealocate</span>
+                        </div>
+                        <div class="body-box-two">
+                            <span class="body-dot">@Model.TrashDetectionAlocatedCount</span>
+                            <span class="text-xsmall wheight500">Probleme alocate</span>
+                        </div>
+                        <div class="body-box-tree">
+                            <span class="body-dot">@Model.TrashDetectionSolvedCount</span>
+                            <span class="text-xsmall wheight500">Probleme rezolvate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sum-card">
+                    <div class="sum-card-title">
+                        <i class="fa-solid fa-car-burst color-white text-large text-center-ic px-3"></i>
+                        <span class="color-white text-large text-center-ic text-no-wrap">Infrastructură rutieră</span>
+                    </div>
+                    <div class="sum-card-body center-flex-justify flex-column">
+                        <div class="body-box-one">
+                            <span class="body-dot">@Model.RoadInfrastructureDetectionUnalocatedCount</span>
+                            <span class="text-xsmall wheight500">Probleme nealocate</span>
+                        </div>
+                        <div class="body-box-two">
+                            <span class="body-dot">@Model.RoadInfrastructureDetectionAlocatedCount</span>
+                            <span class="text-xsmall wheight500">Probleme alocate</span>
+                        </div>
+                        <div class="body-box-tree">
+                            <span class="body-dot">@Model.RoadInfrastructureDetectionSolvedCount</span>
+                            <span class="text-xsmall wheight500">Probleme rezolvate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sum-card">
+                    <div class="sum-card-title">
+                        <i class="fa-solid fa-tv color-white text-large text-center-ic px-3"></i>
+                        <span class="color-white text-large text-center-ic text-no-wrap">Panouri publicitare</span>
+                    </div>
+                    <div class="sum-card-body center-flex-justify flex-column">
+                        <div class="body-box-one">
+                            <span class="body-dot">@Model.BillboardDetectionUnalocatedCount</span>
+                            <span class="text-xsmall wheight500">Probleme nealocate</span>
+                        </div>
+                        <div class="body-box-two">
+                            <span class="body-dot">@Model.BillboardDetectionAlocatedCount</span>
+                            <span class="text-xsmall wheight500">Probleme alocate</span>
+                        </div>
+                        <div class="body-box-tree">
+                            <span class="body-dot">@Model.BillboardDetectionSolvedCount</span>
+                            <span class="text-xsmall wheight500">Probleme rezolvate</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="info-report-box-container">
+            <div class="info-report-box">
+                <div id="chart"></div>
+            </div>
+        </div>
+
+    </div> *@
+    @* <div>
+        <partial name="DetectionFilter" model="@Model.DetectionFilterModel" />
+    </div>
+    <div class="sc-home-middle-container row">
+        <div class="col-md-6">
+            <div class="pagination-results filter-pagination w-100-ic" data-filter-id="#docs-filter" data-filter-on-load="true">
+            </div>
+        </div>
+
+        <div class="col-md-6 sc-map-container">
+            <div id="map" class="info-map-container">
+            </div>
+        </div>
+    </div> *@
+
+    @*    <div class="sc-home-two">
+        <div class="info-report-box-container">
+            <div class="info-report-box">
+                <div id="chart2"></div>
+            </div>
+            <div class="info-report-box">
+                <p class="text-regular wheight700 mb-4">Timp mediu de remediere a unei probleme (zile)</p>
+                <div class="interval-container">
+                    <span class="color-primary-text text-small wheight400">Interval</span>
+                    <input type="date" class="px-2 mx-3" />
+                    <input type="date" class="px-2 mx-3" />
+                </div>
+
+                <div class="info-status-container">
+                    <div class="info-status-box">
+                        <i class="fa-solid fa-recycle color-white text-large text-center-ic"></i>
+                        <span class="info-status-name text-small wheight500">Salubritate</span>
+                        <span class="info-status-dot">
+                            2
+                        </span>
+                    </div>
+
+
+                    <div class="info-status-box">
+                        <i class="fa-solid fa-car-burst color-white text-large text-center-ic"></i>
+                        <span class="info-status-name text-small wheight500">Infrastructură rutieră</span>
+                        <span class="info-status-dot">
+                            7
+                        </span>
+                    </div>
+
+
+
+
+
+                    <div class="info-status-box">
+                        <i class="fa-solid fa-tv color-white text-large text-center-ic"></i>
+                        <span class="info-status-name text-small wheight500">Panouri publicitare</span>
+                        <span class="info-status-dot">
+                            5
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> *@
+</div>
+
+@section scripts {
+   @*  <script src="~/lib/apexcharts/apexcharts.min.js"></script>
+     *@
+
+
+ @*    <script type="text/javascript">
+
+
+
+        var options = {
+            series: [{
+                name: 'Noi',
+                data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+            }, {
+                name: 'In curs',
+                data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+            }, {
+                name: 'Rezolvate',
+                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    borderRadius: 5,
+                    borderRadiusApplication: 'end'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+            },
+            yaxis: {
+                title: {
+                    text: 'numar'
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return  val + " "
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+
+
+
+
+
+        var options2 = {
+            series: [{
+                name: 'TEAM A',
+                type: 'column',
+                data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
+            }, {
+                name: 'TEAM B',
+                type: 'area',
+                data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
+            }, {
+                name: 'TEAM C',
+                type: 'line',
+                data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                stacked: false,
+            },
+            stroke: {
+                width: [0, 2, 5],
+                curve: 'smooth'
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '50%'
+                }
+            },
+
+            fill: {
+                opacity: [0.85, 0.25, 1],
+                gradient: {
+                    inverseColors: false,
+                    shade: 'light',
+                    type: "vertical",
+                    opacityFrom: 0.85,
+                    opacityTo: 0.55,
+                    stops: [0, 100, 100, 100]
+                }
+            },
+            labels: ['01/01/2024', '02/01/2024', '03/01/2024', '04/01/2024', '05/01/2024', '06/01/2024', '07/01/2024',
+                '08/01/2024', '09/01/2024', '10/01/2024', '11/01/2024'
+            ],
+            markers: {
+                size: 0
+            },
+            xaxis: {
+                type: 'datetime'
+            },
+            yaxis: {
+                title: {
+                    text: 'numar',
+                }
+            },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function (y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0) ;
+                        }
+                        return y;
+
+                    }
+                }
+            }
+        };
+
+        var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+        chart2.render();
+    </script> *@
+
+
+
+
+
+
+
+}

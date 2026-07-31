@@ -1,0 +1,58 @@
+﻿.sc-admin-container {
+    overflow: hidden;
+    height: calc(100vh - 120px);
+    border-radius: 16px;
+}
+
+
+.rawDetectionImgContainer {
+    text-align: start;
+    width: auto;
+    max-width: 223px;
+    min-width:223px;
+    min-height:160px;
+    height: auto;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.rawDetectionDataContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.group-data-elements {
+    width: 33% !important;
+}
+
+.sc-admin.sc-general-btn.sc-big-btn {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+}
+
+.rawDetectionCombinedContainer {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+.rawDetectionImgContainer {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+    .rawDetectionImgContainer img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+    }
+
+.rawDetectionDataContainer dt {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.rawDetectionDataContainer dd {
+    margin-bottom: 12px;
+}

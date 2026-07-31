@@ -1,0 +1,214 @@
+﻿@using SmartCity.Web.Models.Detection
+@model DetectionFlowViewModel
+
+@{
+    int index = 0;
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_green.css">
+
+<input asp-for="DetectionId" type="hidden">
+<div class="center-flex-justify-between mt-3">
+    <div>
+        <button type="button" class="sc-general-btn ic-active text-xsmall me-2" data-bs-toggle="modal" data-bs-target="#assignToDepartamentModal" style="width:165px;height:28px">
+            <span>Atribuie la departament</span>
+        </button>
+        <button type="button" class="sc-general-btn ic-active sc-succes text-xsmall me-2" data-bs-toggle="modal" data-bs-target="#markAsRezolvedModal" style="width:165px;height:28px">
+            <span>Marchează că rezolvat</span>
+        </button>
+    </div>
+
+    <div>
+
+        <button type="button" class="sc-general-btn ic-active sc-abort text-xsmall" data-bs-toggle="modal" data-bs-target="#rejectModal" style="width:165px;height:28px;">
+            <span>Respinge</span>
+        </button>
+    </div>
+
+</div>
+
+<div class="chat-message-container mt-2 mb-2">
+    @foreach (var item in Model.Logs)
+    {
+        var extraClass = (index % 2 == 0) ? "box-one" : "box-two";
+
+        <div class="flux-log-single @extraClass">
+            <div style="padding:0px 15px;border-right:1px solid #eeeef1">
+                <div><span class="text-xsmall wheight500">@item.User</span></div>
+                <div><span class="text-xsmall wheight300">@item.CreatedAt</span></div>
+            </div>
+
+            <div><span class="text-xsmall wheight500 log-text">@Html.Raw(item.LogText.Replace(Environment.NewLine, "<br>"))</span></div>
+        </div>
+
+        index++;
+    }
+</div>
+
+<div class="chat-response d-flex-ic gap20">
+    <div class="w-100-ic">
+        <input id="chatResponse" class="form-control sc-custom-inputs form-input sc-xxxlg-width sc-sm-height" style="height:28px; max-height:30px; border-radius: 10px;" />
+    </div>
+    <div>
+        <button type="button" id="btn-add-chat-message2" class="sc-general-btn ic-active text-xsmall me-2" style="width:115px;height:28px">
+            <span>Trimite mesaj</span>
+        </button>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xxlarge28 wheight500 text-no-wrap" id="exampleModalLabel">Respinge</h2>
+                <button type="button" class="text-xlarge close-btn-modal w-100 text-end-ic" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea name="rejectText" id="rejectText" rows="4" class="form-control input-sm"> </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="sc-general-btn ic-active" id="btn-reject">Respinge</button>
+                <button type="button" class="sc-general-btn ic-active sc-close" data-bs-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="markAsRezolvedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xxlarge28 wheight500 text-no-wrap" id="exampleModalLabel">Marcheaza ca rezolvat</h2>
+                <button type="button" class="text-xlarge close-btn-modal w-100 text-end-ic" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea name="markAsRezolvedText" id="markAsRezolvedText" rows="4" class="form-control input-sm"> </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="sc-general-btn ic-active" id="btn-markAsRezolved">Marchează că rezolvat</button>
+                <button type="button" class="sc-general-btn ic-active sc-close" data-bs-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="assignToDepartamentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xxlarge28 wheight500 text-no-wrap" id="exampleModalLabel">Atribuie la echipa</h2>
+                <button type="button" class="text-xlarge close-btn-modal w-100 text-end-ic" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="dep-sel-container">
+                    <div class="mt-2 mb-2 d-flex-ic">
+                        <label class="control-label px-2 text-xsmall wheight400" style="padding: 5px 0px 0px 0px;width:150px" asp-for="AssignToDepartment.DepartamentId"></label>
+                        <select asp-for="AssignToDepartment.DepartamentId" asp-items="@Model.AssignToDepartment.Departaments" asp-with-default="true" class="form-control sc-custom-inputs form-input gn-std-height "></select>
+                    </div>
+                    <div class="mt-2 mb-2 d-flex-ic" id="teamIdContainer2" style="display:none">
+                        <label class="control-label px-2 text-xsmall wheight400" style="padding: 5px 0px 0px 0px;width:150px" asp-for="AssignToDepartment.TeamId"></label>
+                        <select asp-for="AssignToDepartment.TeamId" class="form-control sc-custom-inputs form-input gn-std-height "></select>
+                    </div>
+                    <div class="mt-2 mb-2 d-flex-ic" id="noTeamsId" style="display:none; color:red">
+                        <span>Departamentul selectat nu contine echipe adaugate!</span>
+                    </div>
+                    <textarea name="assignToDepartamentText" id="assignToDepartamentText" rows="4" class="form-control input-sm"> </textarea>
+                    <div class="modal-footer mt-3">
+                        <button type="button" class="sc-general-btn ic-active" id="btn-assignToDepartament">Atribuie</button>
+                        <button type="button" class="sc-general-btn ic-active sc-close" data-bs-dismiss="modal">Renunță</button>
+                    </div>
+                </div>
+                <div class="calendar-container d-flex-ic">
+                    <div class="calendar-contain">
+                        <div id="calendarAssignDate"></div>
+                        <input id="assignDateHidden" name="AssignToDepartment.AssignDate" hidden />
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+@* <script>
+    var flatpickrInstance;
+    const modal = document.getElementById('assignToDepartamentModal');
+
+    function getDateRange(from, to) {
+        const fromDate = new Date(from);
+        const toDate = new Date(to);
+        const dates = [];
+
+        while (fromDate <= toDate) {
+            // Clone the current date to avoid mutation
+            dates.push(new Date(fromDate).toISOString().split("T")[0]);
+            fromDate.setDate(fromDate.getDate() + 1);
+        }
+
+        return dates;
+    }
+
+    modal.addEventListener('shown.bs.modal', function () {
+        if (flatpickrInstance) {
+            flatpickrInstance.destroy();
+        }
+
+        const freeDaysStart = "2025-08-18";
+        const freeDaysEnd = "2025-08-28";
+        const freeDays = getDateRange(freeDaysStart, freeDaysEnd);
+
+        const startDay = freeDays[0];
+        const endDay = freeDays[freeDays.length - 1];
+
+        flatpickrInstance = flatpickr("#calendarAssignDate", {
+            inline: true,
+            mode: "range",
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            locale: "ro",
+            disableMobile: true,
+
+            defaultDate: [startDay, endDay], // optional: preselect the range
+
+            onDayCreate: function(dObj, dStr, fp, dayElem) {
+                const date = dayElem.dateObj.toISOString().split("T")[0];
+
+                if (date === startDay) {
+                    dayElem.classList.add("startSelectedFreeDaysRange");
+                } else if (date === endDay) {
+                    dayElem.classList.add("endSelectedFreeDaysRange");
+                } else if (freeDays.includes(date)) {
+                    dayElem.classList.add("inSelectedFreeDaysRange");
+                }
+
+                if (freeDays.includes(date)) {
+                    dayElem.classList.add("free-day");
+                }
+            },
+
+            onChange: function(selectedDates, dateStr, instance) {
+                document.getElementById("assignDateHidden").value = dateStr;
+            }
+        });
+    });
+</script> *@
+
+<script src="~/js/FrontEnd/Calendar.js" asp-append-version="true"></script>

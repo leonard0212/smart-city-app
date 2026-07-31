@@ -1,0 +1,25 @@
+﻿@using SmartCity.Domain.ServiceModels.Charts
+@model PieChartModel
+
+
+<div id="@Model.Id"></div>
+<div style="display: none;" id="pieChat">@Model.Id</div>
+
+@{
+    var id = Model.Id;
+}
+
+
+@section scripts {
+    <script src="~/lib/apexcharts/apexcharts.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function (e) {
+            var chartId = $("#pieChat").text();
+            var chartData = @Json.Serialize(Model);
+            var chartElement = $("#" + chartId)[0];
+            var pieChart = new ApexCharts(chartElement, chartData);
+            pieChart.render();
+        });
+    </script>
+}

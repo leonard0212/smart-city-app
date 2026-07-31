@@ -1,0 +1,60 @@
+﻿@using SmartCity.Web.Models.Billboard
+@using SmartCity.Domain.Models.Enums
+@using SmartCity.Domain.Extensions
+@model BilboardInfoModel
+
+@{
+    // Define the variable outside of the switch block
+    var billboardCategoryName = "";
+
+    // Use a switch statement to set the value of the variable
+    switch (Model.BillboardCategory)
+    {
+        case BillboardCategory.CommercialProduct:
+            billboardCategoryName = "Panou comercial";
+            break;
+        case BillboardCategory.PoliticalCampaign:
+            billboardCategoryName = "Campanie politică";
+            break;
+        case BillboardCategory.Gambling:
+            billboardCategoryName = "Jocuri de noroc";
+            break;
+        default:
+            billboardCategoryName = "Tip Necunoscut";
+            break;
+    }
+}
+
+@{
+    string billboardSizeClass = Model.BillboardSize.Description() switch
+    {
+        "Mic" => "severity-class small-severity",
+        "Mediu" => "severity-class medium-severity",
+        "Mare" => "severity-class bigger-severity",
+        _ => ""
+    };
+}
+
+<div class="details-container">
+    <div class="details-col-one">
+        <div>
+            <p class="text-regular wheight600">Nume panou publicitar</p>
+            <p class="text-small wheight400">@Model.BillboardName</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Descriere panou publicitar</p>
+            <p class="text-small wheight400">@Model.BillboardSummary</p>
+        </div>
+
+    </div>
+    <div class="details-col-two">
+        <div>
+            <p class="text-regular wheight600">Tip panou publicitar</p>
+            <p class="text-small wheight400">@billboardCategoryName</p>
+        </div>
+        <div>
+            <p class="text-regular wheight600">Dimensiune panou publicitar</p>
+            <p class="@billboardSizeClass text-small wheight400 text-center-ic" style="margin:0">@Model.BillboardSize.Description()</p>
+        </div>
+    </div>
+</div>

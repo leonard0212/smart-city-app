@@ -1,0 +1,15 @@
+﻿@using SmartCity.Domain
+@model IPagedList
+@{
+    var showTotalCount = Convert.ToBoolean(ViewBag.ShowTotalCount);
+}
+
+<pagination hide-on-single-page="true"
+            total-count="Model.TotalCount"
+            has-next-page="Model.HasNextPage"
+            has-previous-page="Model.HasPreviousPage"
+            max-items="50"
+            show-total-count="@showTotalCount"
+            page-count="Model.PageCount"
+            page-index="Model.PageIndex">
+</pagination>

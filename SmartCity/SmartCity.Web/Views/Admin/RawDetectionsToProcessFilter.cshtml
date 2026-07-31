@@ -1,0 +1,48 @@
+﻿@using SmartCity.Web.Models.Admin
+@model RawDetectionsFilterModel
+
+
+<div class=" w-100-ic mt-2" data-controller="admin" data-action="GetRawDetectionsToProcess" id="RawDetections-filter">
+    <div class="row" style="margin-left:18px;">
+
+
+        <div class="form-group col-sm-3 col-lg-3">
+            <label class="control-label" asp-for="EdgeId"></label>
+            <select asp-for="EdgeId" asp-items="@Model.EdgeIds" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            <span asp-validation-for="EdgeId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-sm-3 col-lg-3">
+
+            <label class="control-label" asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" asp-items="@Model.Category" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-3 col-lg-3">
+
+            <label class="control-label" asp-for="SubCategoryId"></label>
+            <select asp-for="SubCategoryId" asp-with-default="true" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+            <span asp-validation-for="SubCategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-3 col-lg-3">
+
+            <label class="control-label px-2 mb-2 text-xsmall wheight400" asp-for="Status">Status</label>
+            <select asp-for-enum="Status" asp-with-default="false" class="form-control sc-custom-inputs form-input sc-sm-width sc-sm-height"></select>
+        </div>
+
+    </div>
+    <div class="mt-4" style="margin-left:18px;">
+        <button type="button" id="btnFilter" class="sc-general-btn ic-active text-small sc-sm-width" style="height:35px;">Caută</button>
+    </div>
+    <div class="pagination-results filter-pagination w-100-ic" id="raw-detections-result-container" data-filter-id="#RawDetections-filter" data-filter-on-load="true">
+    </div>
+
+</div>
+
+
+<div class="sc-home-middle-container row">
+</div>
+
+@* @section scripts {
+    <script src="~/js/rawDetectionsToProcess.js" asp-append-version="true"></script>
+} *@

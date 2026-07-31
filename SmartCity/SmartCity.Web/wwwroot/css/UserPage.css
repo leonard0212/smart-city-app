@@ -1,0 +1,12 @@
+﻿.sc-user-container {
+    height: 100vh;
+    max-width: 2000px;
+    padding: 20px;
+    background: #fff;
+    height: auto;
+    border-radius: 16px;
+}
+
+.sc-user-container form{
+    width:400px
+}

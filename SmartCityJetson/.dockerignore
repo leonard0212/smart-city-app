@@ -1,0 +1,17 @@
+# Ignoră folderul .git
+.git/
+
+# Ignoră fișierul .gitignore
+.gitignore
+
+# Ignoră directoarele cu cache și fișierele temporare
+__pycache__/
+*.pyc
+
+# Ignoră folderul TESTE
+TESTE/
+Saved_Video/
+
+# Ignoră fișierele cu extensia .pt
+*.pt
+*.mp4

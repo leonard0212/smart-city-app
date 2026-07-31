@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[AspNetRoles](
+	[Id] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
+	[Name] [nvarchar](256) NOT NULL,
+	[ConcurrencyStamp] [varchar](255) NULL,
+	[NormalizedName] [varchar](255) NULL,
+ CONSTRAINT [PK_AspNetRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AspNetRoles] ADD  CONSTRAINT [DF_AspNetRoles_Id]  DEFAULT (newid()) FOR [Id]
+GO

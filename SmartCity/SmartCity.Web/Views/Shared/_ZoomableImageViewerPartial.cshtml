@@ -1,0 +1,69 @@
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<input id="detectionIdPreview" type="hidden" />
+
+<div id="zoomableImageViewerContainer" class="absolute-div-container center-flex-justify-between flex-column">
+    <p>Details for ID: <span class="img-id"></span></p>
+    <button class="close-btn gn-btn title-large" style="position: absolute; right: 0px; top: 4px; right: 6px;">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="generic-filter-controls">
+        @* <label>Adjust Filter:</label> *@
+        <select id="filterSelector" class="sc-custom-inputs form-input sc-sm-width sc-sm-height">
+            <option value="scale" selected>Scale</option>
+            <option value="brightness">Brightness</option>
+            <option value="contrast">Contrast</option>
+            <option value="saturate">Saturation</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="sepia">Sepia</option>
+            <option value="invert">Invert</option>
+            <option value="blur">Blur</option>
+        </select>
+        <button class="btn-filter-increase sc-general-btn">+</button>
+        <button class="btn-filter-decrease sc-general-btn">−</button>
+    </div>
+
+
+
+        <ul class="nav nav-tabs sc-tabs" id="imageTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active sc-tabs" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
+                        type="button" role="tab" aria-controls="tab1" aria-selected="true">
+                    Full Image
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link sc-tabs" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2"
+                        type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                    Full Crop
+                </button>
+            </li>
+        </ul>
+
+
+        <div class="tab-content mt-3" id="imageTabContent">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                <div class="image-container">
+                    <div id="app-max-loader-container" class="max-loader"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                <div class="image-container2">
+                    <div id="app-max-loader-container" class="max-loader"></div>
+                </div>
+            </div>
+        </div>
+    
+    <div class="btn-group-admin-large-view">
+        <button class="close-btn sc-general-btn admin-table title-xsmall">Close</button>
+        <div>
+            @if (string.Equals(currentController, "Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                <button type="button" class="sc-general-btn admin-table title-xsmall btn-import-raw-data"><i class="fa-solid fa-file-import me-3"></i>Import</button>
+                <button type="button" class="sc-general-btn admin-table title-xsmall btn-delete-raw-data"><i class="fa-solid fa-trash me-3"></i>Delete</button>
+            }
+        </div>
+    </div>
+</div>

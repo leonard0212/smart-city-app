@@ -1,0 +1,25 @@
+﻿@using SmartCity.Domain.ServiceModels
+@model List<DetectionFileServiceModel>
+<div style="overflow:hidden; margin: 0px 15px;">
+    <div class="carousel-images">
+
+
+        @foreach (var item in Model)
+        {
+            <img src="data:image/png;base64,@(Convert.ToBase64String(item.File.Content))" alt="city image" data-id="@item.DetectionId" class="carousel-images-item" />
+            
+        
+        }
+
+
+
+    @*     <img src="~/Assets/City/1.jpg" alt="city image" data-id="1" class="carousel-images-item" />
+        <img src="~/Assets/City/2.jpg" alt="city image" data-id="2" class="carousel-images-item" />
+        <img src="~/Assets/City/3.jpg" alt="city image" data-id="3" class="carousel-images-item" />
+        <img src="~/Assets/City/4.jpg" alt="city image" data-id="4" class="carousel-images-item" />
+        <img src="~/Assets/City/1.jpg" alt="city image" data-id="5" class="carousel-images-item" />
+        <img src="~/Assets/City/2.jpg" alt="city image" data-id="6" class="carousel-images-item" />
+        <img src="~/Assets/City/3.jpg" alt="city image" data-id="7" class="carousel-images-item" />
+        <img src="~/Assets/City/4.jpg" alt="city image" data-id="8" class="carousel-images-item" /> *@
+    </div>
+</div>

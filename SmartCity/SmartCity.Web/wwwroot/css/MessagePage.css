@@ -1,0 +1,44 @@
+﻿.sc-mes-page-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 4px;
+    border-radius: 16px;
+    padding: 50px 30px 50px 36px;
+   overflow:hidden
+}
+
+.sc-mes-structure{
+    min-width:270px;
+}
+
+
+.sc-mes-container {
+    border: 1px solid #D5D3D3;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+.message-box-container{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:20px;
+}
+
+
+
+    .message-box-container.message-0 {
+        background: #f6f6f6;
+    }
+
+    .message-box-container.message-1 {
+        background: #ffffff;
+    }
+    .message-box-container:hover {
+        background: #D5D3D3;
+    }

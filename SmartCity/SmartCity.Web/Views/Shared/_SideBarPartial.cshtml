@@ -1,0 +1,255 @@
+﻿<link rel="stylesheet" href="~/css/Components/SideBar.css" asp-append-version="true" />
+
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var isDispatcher = true;
+    var isAdmin = false;
+}
+
+<nav id="sidebar" class="sc-slideBar active">
+    <div class="sidebar-header">
+        <a class="navbar-brand" asp-area="" asp-controller="" asp-action="">
+
+        </a>
+    </div>
+
+    <div class="sc-slideBar user-container">
+        <p class="user-initials"></p>
+        @* <p class="user-identity">@User.Identity.Name</p> *@
+    </div>
+
+    <ul class="list-unstyled components sc-slideBar">
+        @* <li class="active">
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+        <ul class="collapse list-unstyled" id="homeSubmenu">
+        <li>
+        <a asp-controller="Job" asp-action="Index">Jobs</a>
+        </li>
+        <li>
+        <a href="#">Home 2</a>
+        </li>
+        <li>
+        <a href="#">Home 3</a>
+        </li>
+        </ul>
+        </li> *@
+        @*  <li>
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+        <ul class="collapse list-unstyled" id="pageSubmenu">
+        <li>
+        <a href="#">Page 1</a>
+        </li>
+        <li>
+        <a href="#">Page 2</a>
+        </li>
+        <li>
+        <a href="#">Page 3</a>
+        </li>
+        </ul>
+        </li> *@
+
+
+
+
+
+        @*         @if (SecurityContext.UserIsInRole("Admin")) { 
+    } *@
+
+        @if (isDispatcher || isAdmin)
+        {
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+            @(currentController == "Home" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <img src="~/Assets/Icons/raportari.svg" />
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Raportari</div>
+                </a>
+            </li>
+
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+        @(currentController == "Department" && currentAction == "Gantt" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-controller="Department" asp-action="Gantt">
+                    <div class="sideBar-icon center-flex">
+                        <img src="~/Assets/Icons/departamente.svg" />
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Departamente</div>
+                </a>
+            </li>
+
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+         @(currentController == "Analytics" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Analytics" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <img src="~/Assets/Icons/analiza.svg" />
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Analiza</div>
+                </a>
+            </li>
+
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+         @(currentController == "Message" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Message" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <img src="~/Assets/Icons/mesaje.svg" />
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Mesaje</div>
+                </a>
+            </li>
+
+
+            <li id="adminSubMenu" class="slideBar-item-container sc-slideBar center-flex-align mb-4
+            @(currentController == "Admin" || (currentController == "Department" && currentAction == "Index") || currentController == "UserManagement"
+                                                                                                                                    ? "slideBar-ic-active" : "")">
+            <a class="slideBar-item sc-slideBar text-regular w-100">
+                <div class="sideBar-icon center-flex">
+                    <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                </div>
+                <div class="sidebar-item-text slideBar-active text-small">Admin</div>
+            </a>
+        </li>
+
+            <div class="admin-submenu-container @((currentController == "Admin" || currentController == "Department" && currentAction != "Gantt" || currentController == "UserManagement") ? "sub-menu-active" : "")" id="adminSubmenuContainer">
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4 @(currentController == "Admin" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Admin" asp-action="RawDetectionsToProcess">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Detectări</div>
+                </a>
+            </li>
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+                    @(currentController == "UserManagement" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="UserManagement" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">User</div>
+                </a>
+            </li>
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+                        @(currentController == "Department" && currentAction != "Gantt" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Department" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Departamente Edit</div>
+                </a>
+            </li>
+            </div>
+
+                }
+
+
+
+        @*         @if (SecurityContext.UserIsInRole("Dispatcher")) { 
+    } *@
+
+        @if (isAdmin)
+        {
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+        @(currentController == "Trash" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Trash" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-recycle sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Salubritate</div>
+                </a>
+            </li>
+
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+        @(currentController == "RoadInfrastructure" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="RoadInfrastructure" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-car-burst sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Infrastructură rutieră</div>
+                </a>
+            </li>
+
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+        @(currentController == "Billboard" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Billboard" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-tv sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Panouri publicitare</div>
+                </a>
+            </li>
+
+            <li id="adminSubMenu" class="slideBar-item-container sc-slideBar center-flex-align mb-4
+        @(currentController == "Admin" || (currentController == "Department" && currentAction == "Index") || currentController == "UserManagement"
+                                                                                                  ? "slideBar-ic-active" : "")">
+            <a class="slideBar-item sc-slideBar text-regular w-100">
+                <div class="sideBar-icon center-flex">
+                    <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                </div>
+                <div class="sidebar-item-text slideBar-active text-small">Admin</div>
+            </a>
+        </li>
+
+            <div class="admin-submenu-container" id="adminSubmenuContainer">
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4 @(currentController == "Admin" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Admin" asp-action="RawDetectionsToProcess">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Detectări</div>
+                </a>
+            </li>
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+                @(currentController == "UserManagement" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="UserManagement" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">User</div>
+                </a>
+            </li>
+            <li class="slideBar-item-container sc-slideBar center-flex-align mb-4
+                @(currentController == "Department" ? "slideBar-ic-active" : "")">
+                <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Department" asp-action="Index">
+                    <div class="sideBar-icon center-flex">
+                        <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i>
+                    </div>
+                    <div class="sidebar-item-text slideBar-active text-small">Departamente</div>
+                </a>
+            </li>
+            </div>
+                }
+
+
+
+
+
+        @*     <li class="slideBar-item-container sc-slideBar center-flex-align mb-4 *@
+        @* @(currentController == "SpațiiVerzi" ? "slideBar-ic-active" : "")"> *@
+        @*         <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="SpațiiVerzi" asp-action="Index"> *@
+        @*             <div class="sideBar-icon center-flex"> *@
+        @*                 <i class="fa-solid fa-tree sc-slideBar color-white text-large text-center-ic"></i> *@
+        @*             </div> *@
+        @*             <div class="sidebar-item-text slideBar-active text-regular">Spații verzi</div> *@
+        @*         </a> *@
+        @*     </li> *@
+
+        @* <li class="slideBar-item-container sc-slideBar center-flex-align mb-4 *@
+        @*     @(currentController == "Admin" || currentController == "Department"|| currentController == "UserManagement" ? "slideBar-ic-active" : "")"> *@
+        @*     <a class="slideBar-item sc-slideBar text-regular w-100" asp-area="" asp-controller="Admin" asp-action="Index"> *@
+        @*         <div class="sideBar-icon center-flex"> *@
+        @*             <i class="fa-solid fa-user-gear sc-slideBar color-white text-large text-center-ic"></i> *@
+        @*         </div> *@
+        @*         <div class="sidebar-item-text slideBar-active text-regular">Admin</div> *@
+        @*     </a> *@
+        @* </li> *@
+    </ul>
+
+    @* <ul class="list-unstyled CTAs">
+    <li>
+    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+    </li>
+    <li>
+    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+    </li>
+    </ul> *@
+</nav>
