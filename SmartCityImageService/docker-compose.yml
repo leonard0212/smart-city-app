@@ -1,0 +1,9 @@
+services:
+  smartcity-image-service:
+    build: .
+    image: smartcity-image-service:latest
+    container_name: smartcity-image-service
+    ports:
+      # SmartCity.Core calls the service on port 8884
+      - "8884:8888"
+    restart: unless-stopped
